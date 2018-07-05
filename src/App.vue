@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Game Panel</router-link> |
+      <a href="#!">Settings?</a>
     </div>
     <router-view/>
   </div>
