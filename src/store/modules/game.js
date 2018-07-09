@@ -40,7 +40,7 @@ const mutations = {
       state.board.push([]);
       for (let j = 0; j < state.cols; j += 1) {
         state.board[i][j] = {
-          content: '.',
+          content: '',
           background: '',
         };
       }
@@ -70,7 +70,7 @@ const mutations = {
   },
   CLEAR_LAST_BLOCK(state) {
     Vue.set(state.board[state.lastRow], state.lastCol, {
-      content: '.',
+      content: '',
       background: '',
     });
   },
@@ -93,14 +93,14 @@ const mutations = {
     console.log('CLEAR', blocks);
     blocks.forEach((block) => {
       Vue.set(state.board[block.row], block.col, {
-        content: '.',
+        content: '',
         background: '',
       });
 
       // Shift top blocks one block to bottom
       let upperBlock = block.row - 1;
 
-      while (state.board[upperBlock][block.col].content !== '.') {
+      while (state.board[upperBlock][block.col].content !== '') {
         Vue.set(state.board[upperBlock + 1], block.col, {
           content: state.board[upperBlock][block.col].content,
           background: 'orangered',
@@ -108,9 +108,9 @@ const mutations = {
 
         upperBlock -= 1;
         // Only clear the top most block
-        if (state.board[upperBlock][block.col].content === '.') {
+        if (state.board[upperBlock][block.col].content === '') {
           Vue.set(state.board[upperBlock + 1], block.col, {
-            content: '.',
+            content: '',
             background: '',
           });
         }
@@ -129,16 +129,16 @@ function rightIsWall() {
 }
 
 function leftIsBlock() {
-  return state.board[state.currentRow][state.currentCol - 1].content !== '.';
+  return state.board[state.currentRow][state.currentCol - 1].content !== '';
 }
 
 function rightIsBlock() {
   // index out of bond...
-  return state.board[state.currentRow][state.currentCol + 1].content !== '.';
+  return state.board[state.currentRow][state.currentCol + 1].content !== '';
 }
 
 function bottomIsBlock() {
-  return state.board[state.currentRow + 1][state.currentCol].content !== '.';
+  return state.board[state.currentRow + 1][state.currentCol].content !== '';
 }
 
 function noMoreRow() {
@@ -152,7 +152,7 @@ function checkForMatchWord(commit) {
   let word = '';
 
   // Left side of current block
-  while (!found && cc >= 0 && state.board[cr][cc].content !== '.') {
+  while (!found && cc >= 0 && state.board[cr][cc].content !== '') {
     word = state.currentChar;
 
     for (let i = state.currentCol - 1; i === cc; i -= 1) {
@@ -178,7 +178,7 @@ function checkForMatchWord(commit) {
 
   // Right side of current block
   cc = state.currentCol + 1;
-  while (!found && cc < state.cols && state.board[cr][cc].content !== '.') {
+  while (!found && cc < state.cols && state.board[cr][cc].content !== '') {
     word = state.currentChar;
 
     for (let i = state.currentCol + 1; i === cc; i += 1) {
@@ -207,7 +207,7 @@ function checkForMatchWord(commit) {
   // Current block bottom
   cc = state.currentCol;
   cr = state.currentRow + 1;
-  while (!found && cr < state.rows && state.board[cr][cc].content !== '.') {
+  while (!found && cr < state.rows && state.board[cr][cc].content !== '') {
     word = state.currentChar;
 
     for (let i = state.currentRow + 1; i === cr; i += 1) {
@@ -238,14 +238,14 @@ function checkForMatchWord(commit) {
   // Find the right most index of the possible word
   while (
     wordRightIndex < state.cols - 1 &&
-    state.board[state.currentRow][wordRightIndex].content !== '.'
+    state.board[state.currentRow][wordRightIndex].content !== ''
   ) {
     wordRightIndex += 1;
   }
   // Find the left most index of the possible word
   while (
     wordLeftIndex > 0 &&
-    state.board[state.currentRow][wordLeftIndex].content !== '.'
+    state.board[state.currentRow][wordLeftIndex].content !== ''
   ) {
     wordLeftIndex -= 1;
   }

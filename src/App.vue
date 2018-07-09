@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Game Panel</router-link> |
       <a href="#!">Settings?</a>
+    </div> -->
+
+    <div class="game-container">
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
 
@@ -16,16 +19,12 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.game-container {
+  padding: 25px;
+  background: rgb(0, 153, 255);
+  border-radius: 8px;
+  border: 1px solid rgb(0, 102, 133);
+  border-bottom-width: 5px;
+  box-shadow: 0 15px 10px -5px lightgray;
 }
 </style>
