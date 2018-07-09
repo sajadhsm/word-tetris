@@ -230,6 +230,49 @@ function checkForMatchWord(commit) {
     }
     cr += 1;
   }
+
+  // Check possible currect word when a character placed between two other blocks
+  let wordRightIndex = state.currentCol;
+  let wordLeftIndex = state.currentCol;
+
+  // Find the right most index of the possible word
+  while (
+    wordRightIndex < state.cols - 1 &&
+    state.board[state.currentRow][wordRightIndex].content !== '.'
+  ) {
+    wordRightIndex += 1;
+  }
+  // Find the left most index of the possible word
+  while (
+    wordLeftIndex > 0 &&
+    state.board[state.currentRow][wordLeftIndex].content !== '.'
+  ) {
+    wordLeftIndex -= 1;
+  }
+
+  // Create words from right to left and check if any of them
+  // is in the word lists
+  for (let i = wordRightIndex; i > wordLeftIndex; i -= 1) {
+    word = state.board[state.currentRow][i].content;
+    const blocks = [{
+      row: state.currentRow,
+      col: i,
+    }];
+
+    for (let j = i - 1; j > wordLeftIndex; j -= 1) {
+      word += state.board[state.currentRow][j].content;
+      blocks.push({
+        row: state.currentRow,
+        col: j,
+      });
+
+      if (state.words.includes(word)) {
+        commit('CLEAR_WORD_BLOCKS', blocks);
+        state.score += 10;
+        return;
+      }
+    }
+  }
 }
 
 const actions = {
