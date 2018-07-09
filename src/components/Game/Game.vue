@@ -10,6 +10,7 @@
 import GameHeader from './GameHeader.vue';
 import GameBoard from './GameBoard.vue';
 import GameControls from './GameControls.vue';
+import words from '../../data/words';
 
 export default {
   name: 'Game',
@@ -20,17 +21,7 @@ export default {
   },
   created() {
     console.log('CREATED!');
-    this.$store.commit('SET_WORDS', [
-      'آب',
-      'سلام',
-      // 'انسان',
-      // 'دانشگاه',
-      // 'فناورد',
-      // 'مسابقه',
-      // 'رابط',
-      // 'جمله',
-      // 'داستان',
-    ]);
+    this.$store.commit('SET_WORDS', words);
     this.$store.commit('SET_CHARACTERS');
     this.$store.commit('SET_BOARD');
   },
