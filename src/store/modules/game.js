@@ -96,11 +96,24 @@ const mutations = {
         content: '.',
         background: '',
       });
+
+      // Shift top blocks one block to bottom
       let upperBlock = block.row - 1;
 
       while (state.board[upperBlock][block.col].content !== '.') {
-        console.log(state.board[upperBlock][block.col]);
+        Vue.set(state.board[upperBlock + 1], block.col, {
+          content: state.board[upperBlock][block.col].content,
+          background: 'orangered',
+        });
+
         upperBlock -= 1;
+        // Only clear the top most block
+        if (state.board[upperBlock][block.col].content === '.') {
+          Vue.set(state.board[upperBlock + 1], block.col, {
+            content: '.',
+            background: '',
+          });
+        }
       }
     });
   },
