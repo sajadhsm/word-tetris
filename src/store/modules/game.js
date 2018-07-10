@@ -13,6 +13,7 @@ const state = {
   lastRow: 0,
   lastCol: 0,
   score: 0,
+  matchWords: 0,
 };
 
 const getters = {
@@ -171,6 +172,7 @@ function checkForMatchWord(commit) {
       commit('CLEAR_WORD_BLOCKS', blocks);
       found = true;
       state.score += 10;
+      state.matchWords += 1;
       return;
     }
     cc -= 1;
@@ -199,6 +201,7 @@ function checkForMatchWord(commit) {
       commit('CLEAR_WORD_BLOCKS', blocks);
       found = true;
       state.score += 10;
+      state.matchWords += 1;
       return;
     }
     cc += 1;
@@ -226,6 +229,7 @@ function checkForMatchWord(commit) {
       commit('CLEAR_WORD_BLOCKS', blocks);
       found = true;
       state.score += 10;
+      state.matchWords += 1;
       return;
     }
     cr += 1;
@@ -269,6 +273,7 @@ function checkForMatchWord(commit) {
       if (state.words.includes(word)) {
         commit('CLEAR_WORD_BLOCKS', blocks);
         state.score += 10;
+        state.matchWords += 1;
         return;
       }
     }

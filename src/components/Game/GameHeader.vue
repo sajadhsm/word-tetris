@@ -2,7 +2,7 @@
   <div class="game-header">
     <div class="game-info">
       <p>امتیاز: {{ $store.state.game.score }}</p>
-      <p>تعداد کلمات: ۱۵۱</p>
+      <p>تعداد کلمات: {{ $store.state.game.matchWords }}</p>
       <p>زمان: ۰۱:۲۰:۳۵</p>
     </div>
 
