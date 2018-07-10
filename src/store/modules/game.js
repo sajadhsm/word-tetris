@@ -114,9 +114,10 @@ const mutations = {
       let upperBlock = block.row - 1;
 
       while (state.board[upperBlock][block.col].content !== '') {
+        const blk = state.board[upperBlock][block.col];
         Vue.set(state.board[upperBlock + 1], block.col, {
-          content: state.board[upperBlock][block.col].content,
-          background: 'orangered',
+          content: blk.content,
+          background: charsBG[blk.content] || 'orangered',
         });
 
         upperBlock -= 1;
