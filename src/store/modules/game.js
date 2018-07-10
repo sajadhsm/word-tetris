@@ -171,7 +171,6 @@ function leftIsBlock() {
 }
 
 function rightIsBlock() {
-  // index out of bond...
   return state.board[state.currentRow][state.currentCol + 1].content !== '';
 }
 
@@ -324,7 +323,8 @@ const actions = {
   },
 
   moveLeft({ commit }) {
-    // Errors... Check console when the current block is hitting right wall
+    if (leftIsWall() || leftIsBlock()) return;
+
     if (leftIsBlock() && bottomIsBlock()) {
       commit('SET_SPAWN_LOCATION');
       commit('SET_CURRENT_CHAR');
@@ -332,22 +332,20 @@ const actions = {
       return;
     }
 
-    if (leftIsWall() || leftIsBlock()) return;
-
     commit('MOVE_LEFT');
     commit('CLEAR_LAST_BLOCK');
     commit('SET_CURRENT_BLOCK');
   },
 
   moveRight({ commit }) {
+    if (rightIsWall() || rightIsBlock()) return;
+
     if (rightIsBlock() && bottomIsBlock()) {
       commit('SET_SPAWN_LOCATION');
       commit('SET_CURRENT_CHAR');
       commit('SET_CURRENT_BLOCK');
       return;
     }
-
-    if (rightIsWall() || rightIsBlock()) return;
 
     commit('MOVE_RIGHT');
     commit('CLEAR_LAST_BLOCK');
