@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import charsBG from '../../data/charactersBG';
 
 const state = {
   words: [],
@@ -27,6 +28,7 @@ const mutations = {
   SET_WORDS(state, words) {
     state.words = words;
   },
+
   SET_CHARACTERS(state) {
     state.characters = state.words.reduce((chars, word) => {
       word.split('').forEach((char) => {
@@ -36,6 +38,7 @@ const mutations = {
       return chars;
     }, []);
   },
+
   SET_BOARD(state) {
     for (let i = 0; i < state.rows; i += 1) {
       state.board.push([]);
@@ -47,49 +50,58 @@ const mutations = {
       }
     }
   },
+
   START_GAME(state) {
     state.currentChar = getters.randomChar();
     state.nextChar = getters.randomChar();
   },
+
   SET_CURRENT_CHAR(state) {
     state.currentChar = state.nextChar;
     state.nextChar = getters.randomChar();
   },
+
   SET_SPAWN_LOCATION(state) {
     state.lastRow = 0;
     state.lastCol = 0;
     state.currentRow = 0;
     state.currentCol = Math.floor((state.cols - 1) / 2);
   },
+
   SET_CURRENT_BLOCK(state) {
     // Work on this... Read reactivty of vuejs...
     // Must be a better way of doing this
     Vue.set(state.board[state.currentRow], state.currentCol, {
       content: state.currentChar,
-      background: 'orangered',
+      background: charsBG[state.currentChar] || 'orangered',
     });
   },
+
   CLEAR_LAST_BLOCK(state) {
     Vue.set(state.board[state.lastRow], state.lastCol, {
       content: '',
       background: '',
     });
   },
+
   MOVE_LEFT(state) {
     state.lastCol = state.currentCol;
     state.lastRow = state.currentRow;
     state.currentCol -= 1;
   },
+
   MOVE_RIGHT(state) {
     state.lastCol = state.currentCol;
     state.lastRow = state.currentRow;
     state.currentCol += 1;
   },
+
   MOVE_DOWN(state) {
     state.lastCol = state.currentCol;
     state.lastRow = state.currentRow;
     state.currentRow += 1;
   },
+
   CLEAR_WORD_BLOCKS(state, blocks) {
     console.log('CLEAR', blocks);
     blocks.forEach((block) => {
@@ -118,6 +130,7 @@ const mutations = {
       }
     });
   },
+
   CLEAR_BOARD(state) {
     for (let i = 0; i < state.rows; i += 1) {
       for (let j = 0; j < state.cols; j += 1) {
@@ -128,6 +141,7 @@ const mutations = {
       }
     }
   },
+
   RESET_GAME_STATE(state) {
     state.score = 0;
     state.matchWords = 0;
@@ -308,6 +322,7 @@ const actions = {
     commit('START_GAME');
     commit('SET_CURRENT_BLOCK');
   },
+
   moveLeft({ commit }) {
     // Errors... Check console when the current block is hitting right wall
     if (leftIsBlock() && bottomIsBlock()) {
@@ -323,6 +338,7 @@ const actions = {
     commit('CLEAR_LAST_BLOCK');
     commit('SET_CURRENT_BLOCK');
   },
+
   moveRight({ commit }) {
     if (rightIsBlock() && bottomIsBlock()) {
       commit('SET_SPAWN_LOCATION');
@@ -337,6 +353,7 @@ const actions = {
     commit('CLEAR_LAST_BLOCK');
     commit('SET_CURRENT_BLOCK');
   },
+
   moveDown({ commit }) {
     if (noMoreRow() || bottomIsBlock()) {
       checkForMatchWord(commit);
