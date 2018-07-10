@@ -1,8 +1,8 @@
 <template>
   <div class="game-header">
     <div class="game-info">
-      <p>امتیاز: {{ $store.state.game.score }}</p>
-      <p>تعداد کلمات: {{ $store.state.game.matchWords }}</p>
+      <p>امتیاز: {{ $store.state.game.score | toPersianNum }}</p>
+      <p>تعداد کلمات: {{ $store.state.game.matchWords | toPersianNum }}</p>
       <p>زمان: ۰۱:۲۰:۳۵</p>
     </div>
 
@@ -11,7 +11,9 @@
     </div>
 
     <div class="game-controls">
-      <button class="button" @click="startGame">شروع</button>
+      <button
+        class="button"
+        @click="startGame">شروع</button>
       <button class="button">تنظیمات</button>
     </div>
   </div>

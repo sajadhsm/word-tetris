@@ -8,13 +8,14 @@
 
 <script>
 import { mapActions } from 'vuex';
+
 export default {
   name: 'GameControls',
   methods: mapActions([
     'moveLeft',
     'moveRight',
     'moveDown',
-  ])
+  ]),
 };
 </script>
 
@@ -34,5 +35,3 @@ export default {
   cursor: pointer;
 }
 </style>
-
-
