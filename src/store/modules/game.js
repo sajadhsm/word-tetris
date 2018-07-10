@@ -15,6 +15,7 @@ const state = {
   lastCol: 0,
   score: 0,
   matchWords: 0,
+  gameOver: false,
 };
 
 const getters = {
@@ -157,6 +158,10 @@ const mutations = {
 
     state.lastRow = 0;
     state.lastCol = 0;
+  },
+
+  GAME_OVER(state) {
+    state.gameOver = true;
   },
 };
 
@@ -358,6 +363,12 @@ const actions = {
   moveDown({ commit }) {
     if (noMoreRow() || bottomIsBlock()) {
       checkForMatchWord(commit);
+
+      if (state.currentRow === 0 && bottomIsBlock()) {
+        commit('GAME_OVER');
+        console.log('GAME OVER :(');
+        return;
+      }
 
       commit('SET_SPAWN_LOCATION');
       commit('SET_CURRENT_CHAR');

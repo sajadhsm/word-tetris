@@ -59,6 +59,8 @@ export default {
       return `${h}:${m}:${s}`;
     },
   },
+  // TODO: Most of code are repeated in some places
+  //       Review and wrap them into functions
   methods: {
     startNewGame() {
       this.newGame = false;
@@ -81,6 +83,14 @@ export default {
       }, 1000);
 
       gameLoopInterval = setInterval(() => {
+        // Wrap it info function
+        if (this.$store.state.game.gameOver) {
+          this.newGame = true;
+          this.gameIsRunning = false;
+          clearInterval(gameLoopInterval);
+          clearInterval(timerInterval);
+        }
+
         this.$store.dispatch('moveDown');
       }, 500);
     },
@@ -110,6 +120,14 @@ export default {
       }, 1000);
 
       gameLoopInterval = setInterval(() => {
+        // Wrap it info function
+        if (this.$store.state.game.gameOver) {
+          this.newGame = true;
+          this.gameIsRunning = false;
+          clearInterval(gameLoopInterval);
+          clearInterval(timerInterval);
+        }
+
         this.$store.dispatch('moveDown');
       }, 500);
     },
