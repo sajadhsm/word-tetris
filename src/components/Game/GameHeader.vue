@@ -3,7 +3,7 @@
     <div class="game-info">
       <p>امتیاز: {{ $store.state.game.score | toPersianNum }}</p>
       <p>تعداد کلمات: {{ $store.state.game.matchWords | toPersianNum }}</p>
-      <p>زمان: ۰۱:۲۰:۳۵</p>
+      <p>زمان: {{ timer | toPersianNum }}</p>
     </div>
 
     <div class="next-block-container">
@@ -20,12 +20,46 @@
 </template>
 
 <script>
+let timerInterval;
+let gameLoopInterval;
+
 export default {
   name: 'GameHeader',
+  data() {
+    return {
+      seconds: 0,
+      minutes: 0,
+      hours: 0,
+    };
+  },
+  computed: {
+    timer() {
+      const s = (this.seconds < 10) ? `0${this.seconds}` : this.seconds;
+      const m = (this.minutes < 10) ? `0${this.minutes}` : this.minutes;
+      const h = (this.hours < 10) ? `0${this.hours}` : this.hours;
+
+      return `${h}:${m}:${s}`;
+    },
+  },
   methods: {
     startGame() {
       this.$store.dispatch('startGame');
-      const gameLoop = setInterval(() => {
+
+      timerInterval = setInterval(() => {
+        this.seconds += 1;
+
+        if (this.seconds === 59) {
+          this.seconds = 0;
+          this.minutes += 1;
+
+          if (this.minutes === 59) {
+            this.minutes = 0;
+            this.hours += 1;
+          }
+        }
+      }, 1000);
+
+      gameLoopInterval = setInterval(() => {
         this.$store.dispatch('moveDown');
       }, 500);
     },
