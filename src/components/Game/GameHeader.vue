@@ -26,7 +26,9 @@
         class="button"
         @click="resumeGame">ادامه</button>
 
-      <button class="button">بازی جدید</button>
+      <button
+        class="button"
+        @click="resetGame">بازی جدید</button>
 
       <button class="button">تنظیمات</button>
     </div>
@@ -82,12 +84,14 @@ export default {
         this.$store.dispatch('moveDown');
       }, 500);
     },
+
     pauseGame() {
       console.log('resume');
       this.gameIsRunning = false;
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
     },
+
     resumeGame() {
       this.gameIsRunning = true;
 
@@ -108,6 +112,20 @@ export default {
       gameLoopInterval = setInterval(() => {
         this.$store.dispatch('moveDown');
       }, 500);
+    },
+
+    resetGame() {
+      this.newGame = true;
+      this.gameIsRunning = false;
+
+      clearInterval(gameLoopInterval);
+      clearInterval(timerInterval);
+
+      this.seconds = 0;
+      this.minutes = 0;
+      this.hours = 0;
+
+      this.$store.dispatch('resetGame');
     },
   },
 };

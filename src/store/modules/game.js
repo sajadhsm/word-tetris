@@ -118,6 +118,29 @@ const mutations = {
       }
     });
   },
+  CLEAR_BOARD(state) {
+    for (let i = 0; i < state.rows; i += 1) {
+      for (let j = 0; j < state.cols; j += 1) {
+        Vue.set(state.board[i], j, {
+          content: '',
+          background: '',
+        });
+      }
+    }
+  },
+  RESET_GAME_STATE(state) {
+    state.score = 0;
+    state.matchWords = 0;
+
+    state.currentChar = '';
+    state.nextChar = '';
+
+    state.currentRow = 0;
+    state.currentCol = 0;
+
+    state.lastRow = 0;
+    state.lastCol = 0;
+  },
 };
 
 // Use a util file for if condications
@@ -327,8 +350,9 @@ const actions = {
     commit('CLEAR_LAST_BLOCK');
     commit('SET_CURRENT_BLOCK');
   },
-  loadNextChar({ commit }) {
-    commit('SET_CURRENT_CHAR');
+  resetGame({ commit }) {
+    commit('CLEAR_BOARD');
+    commit('RESET_GAME_STATE');
   },
 };
 
