@@ -112,6 +112,8 @@ const mutations = {
 
       // Shift top blocks one block to bottom
       let upperBlock = block.row - 1;
+      // if it's the top most row
+      if (upperBlock < 0) return;
 
       while (state.board[upperBlock][block.col].content !== '') {
         const blk = state.board[upperBlock][block.col];
