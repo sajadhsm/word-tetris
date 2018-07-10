@@ -11,9 +11,23 @@
     </div>
 
     <div class="game-controls">
+      <!-- Need better conditions -->
+      <!-- It's good game status buttons have diffrent colors -->
       <button
+        v-if="newGame"
         class="button"
-        @click="startGame">شروع</button>
+        @click="startNewGame">شروع</button>
+      <button
+        v-if="!newGame && gameIsRunning"
+        class="button"
+        @click="pauseGame">توقف</button>
+      <button
+        v-if="!newGame && !gameIsRunning"
+        class="button"
+        @click="resumeGame">ادامه</button>
+
+      <button class="button">بازی جدید</button>
+
       <button class="button">تنظیمات</button>
     </div>
   </div>
@@ -30,6 +44,8 @@ export default {
       seconds: 0,
       minutes: 0,
       hours: 0,
+      newGame: true,
+      gameIsRunning: false,
     };
   },
   computed: {
@@ -42,8 +58,38 @@ export default {
     },
   },
   methods: {
-    startGame() {
+    startNewGame() {
+      this.newGame = false;
+      this.gameIsRunning = true;
+
       this.$store.dispatch('startGame');
+
+      timerInterval = setInterval(() => {
+        this.seconds += 1;
+
+        if (this.seconds === 59) {
+          this.seconds = 0;
+          this.minutes += 1;
+
+          if (this.minutes === 59) {
+            this.minutes = 0;
+            this.hours += 1;
+          }
+        }
+      }, 1000);
+
+      gameLoopInterval = setInterval(() => {
+        this.$store.dispatch('moveDown');
+      }, 500);
+    },
+    pauseGame() {
+      console.log('resume');
+      this.gameIsRunning = false;
+      clearInterval(gameLoopInterval);
+      clearInterval(timerInterval);
+    },
+    resumeGame() {
+      this.gameIsRunning = true;
 
       timerInterval = setInterval(() => {
         this.seconds += 1;
