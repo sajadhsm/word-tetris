@@ -5,6 +5,7 @@ import router from './router';
 import store from './store/store';
 import './registerServiceWorker';
 import './filters/filters';
+import './fontawesome';
 
 Vue.config.productionTip = false;
 
