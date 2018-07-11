@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
+import Game from '@/components/Game/Game.vue';
 import MainMenu from '@/components/Page/MainMenu.vue';
-import GameView from './views/Game.vue';
 
 Vue.use(Router);
 
@@ -15,7 +16,7 @@ export default new Router({
     {
       path: '/game',
       name: 'game-panel',
-      component: GameView,
+      component: Game,
     },
   ],
 });

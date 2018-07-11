@@ -25,6 +25,10 @@ export default {
     this.$store.commit('SET_CHARACTERS');
     this.$store.commit('SET_BOARD');
   },
+  destroyed() {
+    console.log('GAME Destroyed! Reset game states here :)');
+    // TODO: Reset game state...!
+  },
 };
 </script>
 
