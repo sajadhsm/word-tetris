@@ -16,6 +16,7 @@ const state = {
   score: 0,
   matchWords: 0,
   gameOver: false,
+  isGameRunning: false,
 };
 
 const getters = {
@@ -162,6 +163,10 @@ const mutations = {
 
   GAME_OVER(state) {
     state.gameOver = true;
+  },
+
+  TOGGLE_IS_GAME_RUNNING(state) {
+    state.isGameRunning = !state.isGameRunning;
   },
 };
 
@@ -331,7 +336,7 @@ const actions = {
   },
 
   moveLeft({ commit }) {
-    if (leftIsWall() || leftIsBlock()) return;
+    if (!state.isGameRunning || leftIsWall() || leftIsBlock()) return;
 
     if (leftIsBlock() && bottomIsBlock()) {
       commit('SET_SPAWN_LOCATION');
@@ -346,7 +351,7 @@ const actions = {
   },
 
   moveRight({ commit }) {
-    if (rightIsWall() || rightIsBlock()) return;
+    if (!state.isGameRunning || rightIsWall() || rightIsBlock()) return;
 
     if (rightIsBlock() && bottomIsBlock()) {
       commit('SET_SPAWN_LOCATION');
@@ -361,6 +366,9 @@ const actions = {
   },
 
   moveDown({ commit }) {
+    // Don't move the block
+    if (!state.isGameRunning) return;
+
     if (noMoreRow() || bottomIsBlock()) {
       checkForMatchWord(commit);
 
@@ -379,9 +387,14 @@ const actions = {
     commit('CLEAR_LAST_BLOCK');
     commit('SET_CURRENT_BLOCK');
   },
+
   resetGame({ commit }) {
     commit('CLEAR_BOARD');
     commit('RESET_GAME_STATE');
+  },
+
+  toggleIsGameRunning({ commit }) {
+    commit('TOGGLE_IS_GAME_RUNNING');
   },
 };
 

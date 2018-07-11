@@ -13,16 +13,17 @@
     <div class="game-controls">
       <!-- Need better conditions -->
       <!-- It's good game status buttons have diffrent colors -->
+      <!-- Also use mapState to access store states -->
       <button
         v-if="newGame"
         class="button"
         @click="startNewGame">شروع</button>
       <button
-        v-if="!newGame && gameIsRunning"
+        v-if="!newGame && $store.state.game.isGameRunning"
         class="button"
         @click="pauseGame">توقف</button>
       <button
-        v-if="!newGame && !gameIsRunning"
+        v-if="!newGame && !$store.state.game.isGameRunning"
         class="button"
         @click="resumeGame">ادامه</button>
 
@@ -47,7 +48,6 @@ export default {
       minutes: 0,
       hours: 0,
       newGame: true,
-      gameIsRunning: false,
     };
   },
   computed: {
@@ -64,7 +64,7 @@ export default {
   methods: {
     startNewGame() {
       this.newGame = false;
-      this.gameIsRunning = true;
+      this.$store.dispatch('toggleIsGameRunning'); // false > true
 
       this.$store.dispatch('startGame');
 
@@ -86,7 +86,7 @@ export default {
         // Wrap it info function
         if (this.$store.state.game.gameOver) {
           this.newGame = true;
-          this.gameIsRunning = false;
+          this.$store.dispatch('toggleIsGameRunning'); // true > false
           clearInterval(gameLoopInterval);
           clearInterval(timerInterval);
         }
@@ -97,13 +97,13 @@ export default {
 
     pauseGame() {
       console.log('resume');
-      this.gameIsRunning = false;
+      this.$store.dispatch('toggleIsGameRunning'); // true > false
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
     },
 
     resumeGame() {
-      this.gameIsRunning = true;
+      this.$store.dispatch('toggleIsGameRunning'); // false > true
 
       timerInterval = setInterval(() => {
         this.seconds += 1;
@@ -123,7 +123,7 @@ export default {
         // Wrap it info function
         if (this.$store.state.game.gameOver) {
           this.newGame = true;
-          this.gameIsRunning = false;
+          this.$store.dispatch('toggleIsGameRunning'); // true > false
           clearInterval(gameLoopInterval);
           clearInterval(timerInterval);
         }
@@ -134,7 +134,7 @@ export default {
 
     resetGame() {
       this.newGame = true;
-      this.gameIsRunning = false;
+      this.$store.dispatch('toggleIsGameRunning'); // true > false
 
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
