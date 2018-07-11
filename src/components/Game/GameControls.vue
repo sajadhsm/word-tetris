@@ -1,8 +1,8 @@
 <template>
   <div class="controls">
-    <button @click="moveLeft">چپ</button>
-    <button @click="moveDown">پایین</button>
-    <button @click="moveRight">راست</button>
+    <button @click="moveLeft">@</button>
+    <button @click="moveDown">@</button>
+    <button @click="moveRight">@</button>
   </div>
 </template>
 
@@ -35,17 +35,19 @@ export default {
 
 <style scoped>
 .controls {
-  padding: 25px 0 0 0;
+  text-align: center;
+  background: rgba(50, 47, 255, 0.041);
+  padding: 1rem 0;
 }
 
 .controls button {
-  margin: 0 10px;
-  padding: 5px 20px;
-  background: tomato;
-  color: #fff;
-  border: 1px solid rgb(218, 83, 59);
-  border-bottom-width: 5px;
-  border-radius: 2px;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 1rem;
+  background: #fff;
+  border: 5px solid #ddd;
+  border-radius: 43%;
   cursor: pointer;
+  outline: none;
 }
 </style>

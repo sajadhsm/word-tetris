@@ -8,9 +8,15 @@
       <div
         v-for="(col, j) in row"
         :key="j"
-        :style="{ background: col.background }"
         class="col">
-        {{ col.content }}
+
+        <div
+          v-if="col.content !== ''"
+          :style="{ background: col.background }"
+          class="block">
+          {{ col.content }}
+        </div>
+
       </div>
 
     </div>
@@ -29,32 +35,42 @@ export default {
 </script>
 
 <style scoped>
-.game-board {
+/* .game-board {
   padding: 5px;
   border-radius: 2px;
   border: 1px solid black;
   background: rgba(35, 85, 179, 0.438);
-}
+} */
 .row {
   display: flex;
   justify-content: center;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }
 .row:last-child {
   margin: 0;
 }
 .col {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  margin-right: 5px;
-  border-radius: 2px;
-  border: 1px solid #000;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.5rem;
+  border-radius: 42%;
+  background: #ddd;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  overflow: hidden;
 }
 .col:last-child {
   margin: 0;
+}
+
+.block {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
 }
 </style>
 

@@ -1,37 +1,45 @@
 <template>
-  <div class="game-header">
-    <div class="game-info">
-      <p>امتیاز: {{ $store.state.game.score | toPersianNum }}</p>
-      <p>تعداد کلمات: {{ $store.state.game.matchWords | toPersianNum }}</p>
-      <p>زمان: {{ timer | toPersianNum }}</p>
-    </div>
+  <div> <!-- Wrapper for max-width fix -->
+    <div class="game-header">
+      <div class="game-info">
+        <p>امتیاز: {{ $store.state.game.score | toPersianNum }}</p>
+        <p>تعداد کلمات: {{ $store.state.game.matchWords | toPersianNum }}</p>
+        <p>زمان: {{ timer | toPersianNum }}</p>
+      </div>
 
-    <div class="next-block-container">
-      <div class="next-block">{{ $store.state.game.nextChar }}</div>
-    </div>
+      <div class="next-block-container">
+        <div class="next-block">
+          <div
+            style="{background-color: 'orangered'}"
+            class="block">
+            {{ $store.state.game.nextChar }}
+          </div>
+        </div>
+      </div>
 
-    <div class="game-controls">
-      <!-- Need better conditions -->
-      <!-- It's good game status buttons have diffrent colors -->
-      <!-- Also use mapState to access store states -->
-      <button
-        v-if="newGame"
-        class="button"
-        @click="startNewGame">شروع</button>
-      <button
-        v-if="!newGame && $store.state.game.isGameRunning"
-        class="button"
-        @click="pauseGame">توقف</button>
-      <button
-        v-if="!newGame && !$store.state.game.isGameRunning"
-        class="button"
-        @click="resumeGame">ادامه</button>
+      <div class="game-controls">
+        <!-- Need better conditions -->
+        <!-- It's good game status buttons have diffrent colors -->
+        <!-- Also use mapState to access store states -->
+        <button
+          v-if="newGame"
+          class="button"
+          @click="startNewGame">شروع</button>
+        <button
+          v-if="!newGame && $store.state.game.isGameRunning"
+          class="button"
+          @click="pauseGame">توقف</button>
+        <button
+          v-if="!newGame && !$store.state.game.isGameRunning"
+          class="button"
+          @click="resumeGame">ادامه</button>
 
-      <button
-        class="button"
-        @click="resetGame">بازی جدید</button>
+        <button
+          class="button"
+          @click="resetGame">بازی جدید</button>
 
-      <button class="button">تنظیمات</button>
+        <button class="button">تنظیمات</button>
+      </div>
     </div>
   </div>
 </template>
@@ -153,12 +161,10 @@ export default {
 .game-header {
   display: flex;
   justify-content: space-between;
-  min-width: 350px;
-  margin: 0 0 25px 0;
-  padding: 5px;
-  border-radius: 5px;
-  background: rgba(5, 104, 170, 0.527);
-  color: #fff;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: rgba(5, 104, 170, 0.041);
 }
 .game-info {
   flex-basis: calc(100% / 3);
@@ -171,28 +177,33 @@ export default {
   align-items: center;
   flex-basis: calc(100% / 3);
 }
+/* Code dublication with .col */
 .next-block {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border: 2px solid #000;
-  border-radius: 5px;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 40%;
+  background: #ddd;
+  /* color: #fff; */
   font-size: 1.5em;
+  font-weight: 700;
+  overflow: hidden;
 }
 .game-controls {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-basis: calc(100% / 3);
-  /* background: blueviolet; */
+  /* background: rgba(137, 43, 226, 0.103); */
 }
 .game-controls button {
-  background-color: deepskyblue;
-  border-color: dodgerblue;
+  padding: 5px;
+  background: #fff;
+  border: 4px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
 }
-.game-controls button:first-child {
+/* .game-controls button:first-child {
   margin-bottom: 5px;
-}
+} */
 </style>
