@@ -1,8 +1,22 @@
 <template>
   <div class="controls">
-    <button @click="moveLeft">@</button>
-    <button @click="moveDown">@</button>
-    <button @click="moveRight">@</button>
+    <button @click="moveLeft">
+      <font-awesome-icon
+        icon="angle-left"
+        size="2x"/>
+    </button>
+
+    <button @click="moveDown">
+      <font-awesome-icon
+        icon="angle-down"
+        size="2x"/>
+    </button>
+
+    <button @click="moveRight">
+      <font-awesome-icon
+        icon="angle-right"
+        size="2x"/>
+    </button>
   </div>
 </template>
 
