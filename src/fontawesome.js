@@ -8,6 +8,8 @@ import {
   faPlay,
   faPause,
   faRedo,
+  faStar,
+  faClock,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -17,6 +19,8 @@ library.add(
   faPlay,
   faPause,
   faRedo,
+  faStar,
+  faClock,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

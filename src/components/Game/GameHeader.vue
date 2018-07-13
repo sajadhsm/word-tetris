@@ -2,9 +2,15 @@
   <div> <!-- Wrapper for max-width fix -->
     <div class="game-header">
       <div class="game-info">
-        <p>امتیاز: {{ $store.state.game.score | toPersianNum }}</p>
-        <p>تعداد کلمات: {{ $store.state.game.matchWords | toPersianNum }}</p>
-        <p>زمان: {{ timer | toPersianNum }}</p>
+        <GameHeaderState :icon="'star'">
+          {{ $store.state.game.score | toPersianNum }}
+        </GameHeaderState>
+
+        <GameHeaderState :icon="'clock'">
+          {{ timer | toPersianNum }}
+        </GameHeaderState>
+
+        <!-- Match words count will be shown when the game is over -->
       </div>
 
       <div class="next-block-container">
@@ -26,7 +32,7 @@
           @click="resetGame">
           <font-awesome-icon icon="redo"/>
         </button>
-        
+
         <button
           v-if="newGame"
           class="button"
@@ -56,11 +62,16 @@
 </template>
 
 <script>
+import GameHeaderState from './GameHeaderState.vue';
+
 let timerInterval;
 let gameLoopInterval;
 
 export default {
   name: 'GameHeader',
+  components: {
+    GameHeaderState,
+  },
   data() {
     return {
       seconds: 0,
@@ -180,7 +191,7 @@ export default {
 .game-info {
   flex-basis: calc(100% / 3);
   padding: 0 5px;
-  /* background: greenyellow; */
+  /* background: rgba(255, 47, 220, 0.137); */
 }
 .next-block-container {
   display: flex;
@@ -204,7 +215,7 @@ export default {
   justify-content: flex-end;
   align-items: center;
   flex-basis: calc(100% / 3);
-  background: rgba(137, 43, 226, 0.041);
+  /* background: rgba(137, 43, 226, 0.041); */
 }
 /* Create global class for buttons */
 .game-controls button {
