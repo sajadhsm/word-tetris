@@ -39,10 +39,4 @@ export default {
   justify-content: space-between;
   min-height: 100vh;
 }
-
-@media screen and (min-width: 768px) {
-  .game {
-    justify-content: center;
-  }
-}
 </style>
