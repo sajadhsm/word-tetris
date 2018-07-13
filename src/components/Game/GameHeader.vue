@@ -22,23 +22,34 @@
         <!-- It's good game status buttons have diffrent colors -->
         <!-- Also use mapState to access store states -->
         <button
+          class="button"
+          @click="resetGame">
+          <font-awesome-icon icon="redo"/>
+        </button>
+        
+        <button
           v-if="newGame"
           class="button"
-          @click="startNewGame">شروع</button>
+          @click="startNewGame">
+          <font-awesome-icon icon="play" />
+        </button>
+
         <button
           v-if="!newGame && $store.state.game.isGameRunning"
           class="button"
-          @click="pauseGame">توقف</button>
+          @click="pauseGame">
+          <font-awesome-icon icon="pause" />
+        </button>
+        <!-- Use one button and function for game play and resume button
+             Start the game the moment switched to game component
+             or show a count down (3, 2, 1, GO) and then start the game!
+        -->
         <button
           v-if="!newGame && !$store.state.game.isGameRunning"
           class="button"
-          @click="resumeGame">ادامه</button>
-
-        <button
-          class="button"
-          @click="resetGame">بازی جدید</button>
-
-        <button class="button">تنظیمات</button>
+          @click="resumeGame">
+          <font-awesome-icon icon="play" />
+        </button>
       </div>
     </div>
   </div>
@@ -190,20 +201,25 @@ export default {
 }
 .game-controls {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: center;
   flex-basis: calc(100% / 3);
-  /* background: rgba(137, 43, 226, 0.103); */
+  background: rgba(137, 43, 226, 0.041);
 }
+/* Create global class for buttons */
 .game-controls button {
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
   background: #fff;
-  border: 4px solid #ddd;
-  border-radius: 10px;
+  border: 5px solid #ddd;
+  border-radius: 43%;
   cursor: pointer;
   outline: none;
 }
-/* .game-controls button:first-child {
-  margin-bottom: 5px;
-} */
+.game-controls button:last-child {
+  margin-left: 0.75rem;
+}
 </style>
