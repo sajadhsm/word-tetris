@@ -7,7 +7,7 @@
         </GameHeaderState>
 
         <GameHeaderState :icon="'clock'">
-          {{ timer | toPersianNum }}
+          {{ $store.getters.time | toPersianNum }}
         </GameHeaderState>
       </div>
 
@@ -59,18 +59,8 @@ export default {
   },
   data() {
     return {
-      seconds: 0,
-      minutes: 0,
       newGame: true,
     };
-  },
-  computed: {
-    timer() {
-      const s = (this.seconds < 10) ? `0${this.seconds}` : this.seconds;
-      const m = (this.minutes < 10) ? `0${this.minutes}` : this.minutes;
-
-      return `${m}:${s}`;
-    },
   },
   methods: {
     startGame() {
@@ -80,25 +70,20 @@ export default {
       }
 
       this.$store.dispatch('setIsGameRunning', true);
-      
-      timerInterval = setInterval(() => {
-        this.seconds += 1;
 
-        if (this.seconds === 59) {
-          this.seconds = 0;
-          this.minutes += 1;
-        }
-      }, 1000);
+      timerInterval = setInterval(() => (
+        this.$store.dispatch('increaseTime')
+      ), 1000);
 
       gameLoopInterval = setInterval(() => {
         // Wrap it info function
         if (this.$store.state.game.gameOver) {
           this.newGame = true;
           this.$store.dispatch('setIsGameRunning', false);
+
           clearInterval(gameLoopInterval);
           clearInterval(timerInterval);
 
-          this.$store.dispatch('setTime', this.timer);
           this.$router.push('/gameover');
         }
 
@@ -107,8 +92,8 @@ export default {
     },
 
     pauseGame() {
-      console.log('resume');
       this.$store.dispatch('setIsGameRunning', false);
+
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
     },
@@ -119,9 +104,6 @@ export default {
 
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
-
-      this.seconds = 0;
-      this.minutes = 0;
 
       this.$store.dispatch('resetGame');
     },

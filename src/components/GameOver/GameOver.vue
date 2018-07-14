@@ -12,7 +12,7 @@
       </Info>
 
       <Info title="زمان">
-        {{ $store.state.game.time | toPersianNum }}
+        {{ $store.getters.time | toPersianNum }}
       </Info>
     </div>
 

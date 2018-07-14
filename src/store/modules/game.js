@@ -15,7 +15,10 @@ const state = {
   lastCol: 0,
   score: 0,
   matchWords: 0,
-  time: '',
+  time: {
+    seconds: 0,
+    minutes: 0,
+  },
   gameOver: false,
   isGameRunning: false,
 };
@@ -24,6 +27,15 @@ const getters = {
   randomChar() {
     const r = Math.floor(Math.random() * state.characters.length);
     return state.characters[r];
+  },
+  time() {
+    const s = (state.time.seconds < 10) ?
+      `0${state.time.seconds}` : state.time.seconds;
+
+    const m = (state.time.minutes < 10) ?
+      `0${state.time.minutes}` : state.time.minutes;
+
+    return `${m}:${s}`;
   },
 };
 
@@ -71,8 +83,13 @@ const mutations = {
     state.currentCol = Math.floor((state.cols - 1) / 2);
   },
 
-  SET_TIME(state, time) {
-    state.time = time;
+  INCREASE_TIME(state) {
+    state.time.seconds += 1;
+
+    if (state.time.seconds === 59) {
+      state.time.seconds = 0;
+      state.time.minutes += 1;
+    }
   },
 
   SET_CURRENT_BLOCK(state) {
@@ -164,6 +181,9 @@ const mutations = {
 
     state.lastRow = 0;
     state.lastCol = 0;
+
+    state.time.seconds = 0;
+    state.time.minutes = 0;
   },
 
   SET_GAME_OVER(state, status) {
@@ -406,8 +426,8 @@ const actions = {
     commit('SET_IS_GAME_RUNNING', status);
   },
 
-  setTime({ commit }, time) {
-    commit('SET_TIME', time);
+  increaseTime({ commit }) {
+    commit('INCREASE_TIME');
   },
 };
 
