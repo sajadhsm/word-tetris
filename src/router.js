@@ -29,5 +29,9 @@ export default new Router({
         if (store.state.game.gameOver) next();
       },
     },
+    {
+      path: '*', // 404 Handle (Back to main menu)
+      component: MainMenu,
+    },
   ],
 });
