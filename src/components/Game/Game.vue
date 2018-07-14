@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import GameHeader from './GameHeader.vue';
+import GameHeader from './Header/GameHeader.vue';
 import GameBoard from './GameBoard.vue';
 import GameControls from './GameControls.vue';
 import words from '../../data/words';
