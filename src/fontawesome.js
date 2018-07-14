@@ -10,6 +10,8 @@ import {
   faRedo,
   faStar,
   faClock,
+  faHome,
+  faListUl,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -21,6 +23,8 @@ library.add(
   faRedo,
   faStar,
   faClock,
+  faHome,
+  faListUl,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
