@@ -9,8 +9,6 @@
         <GameHeaderState :icon="'clock'">
           {{ timer | toPersianNum }}
         </GameHeaderState>
-
-        <!-- Match words count will be shown when the game is over -->
       </div>
 
       <div class="next-block-container">
@@ -24,9 +22,6 @@
       </div>
 
       <div class="game-controls">
-        <!-- Need better conditions -->
-        <!-- It's good game status buttons have diffrent colors -->
-        <!-- Also use mapState to access store states -->
         <button
           class="button"
           @click="resetGame">
@@ -34,27 +29,17 @@
         </button>
 
         <button
-          v-if="newGame"
+          v-if="!$store.state.game.isGameRunning"
           class="button"
-          @click="startNewGame">
+          @click="startGame">
           <font-awesome-icon icon="play" />
         </button>
 
         <button
-          v-if="!newGame && $store.state.game.isGameRunning"
+          v-else
           class="button"
           @click="pauseGame">
           <font-awesome-icon icon="pause" />
-        </button>
-        <!-- Use one button and function for game play and resume button
-             Start the game the moment switched to game component
-             or show a count down (3, 2, 1, GO) and then start the game!
-        -->
-        <button
-          v-if="!newGame && !$store.state.game.isGameRunning"
-          class="button"
-          @click="resumeGame">
-          <font-awesome-icon icon="play" />
         </button>
       </div>
     </div>
@@ -87,15 +72,15 @@ export default {
       return `${m}:${s}`;
     },
   },
-  // TODO: Most of code are repeated in some places
-  //       Review and wrap them into functions
   methods: {
-    startNewGame() {
-      this.newGame = false;
-      this.$store.dispatch('toggleIsGameRunning'); // false > true
+    startGame() {
+      if (this.newGame) {
+        this.newGame = false;
+        this.$store.dispatch('startGame');
+      }
 
-      this.$store.dispatch('startGame');
-
+      this.$store.dispatch('setIsGameRunning', true);
+      
       timerInterval = setInterval(() => {
         this.seconds += 1;
 
@@ -109,7 +94,7 @@ export default {
         // Wrap it info function
         if (this.$store.state.game.gameOver) {
           this.newGame = true;
-          this.$store.dispatch('toggleIsGameRunning'); // true > false
+          this.$store.dispatch('setIsGameRunning', false);
           clearInterval(gameLoopInterval);
           clearInterval(timerInterval);
 
@@ -123,54 +108,20 @@ export default {
 
     pauseGame() {
       console.log('resume');
-      this.$store.dispatch('toggleIsGameRunning'); // true > false
+      this.$store.dispatch('setIsGameRunning', false);
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
     },
 
-    resumeGame() {
-      this.$store.dispatch('toggleIsGameRunning'); // false > true
-
-      timerInterval = setInterval(() => {
-        this.seconds += 1;
-
-        if (this.seconds === 59) {
-          this.seconds = 0;
-          this.minutes += 1;
-
-          if (this.minutes === 59) {
-            this.minutes = 0;
-            this.hours += 1;
-          }
-        }
-      }, 1000);
-
-      gameLoopInterval = setInterval(() => {
-        // Wrap it info function
-        if (this.$store.state.game.gameOver) {
-          this.newGame = true;
-          this.$store.dispatch('toggleIsGameRunning'); // true > false
-          clearInterval(gameLoopInterval);
-          clearInterval(timerInterval);
-
-          this.$store.dispatch('setTime', this.timer);
-          this.$router.push('/gameover');
-        }
-
-        this.$store.dispatch('moveDown');
-      }, 500);
-    },
-
     resetGame() {
       this.newGame = true;
-      this.$store.dispatch('toggleIsGameRunning'); // true > false
+      this.$store.dispatch('setIsGameRunning', false);
 
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
 
       this.seconds = 0;
       this.minutes = 0;
-      this.hours = 0;
 
       this.$store.dispatch('resetGame');
     },

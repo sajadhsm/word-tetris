@@ -170,8 +170,8 @@ const mutations = {
     state.gameOver = status;
   },
 
-  TOGGLE_IS_GAME_RUNNING(state) {
-    state.isGameRunning = !state.isGameRunning;
+  SET_IS_GAME_RUNNING(state, status) {
+    state.isGameRunning = status;
   },
 };
 
@@ -402,8 +402,8 @@ const actions = {
     commit('RESET_GAME_STATE');
   },
 
-  toggleIsGameRunning({ commit }) {
-    commit('TOGGLE_IS_GAME_RUNNING');
+  setIsGameRunning({ commit }, status) {
+    commit('SET_IS_GAME_RUNNING', status);
   },
 
   setTime({ commit }, time) {
