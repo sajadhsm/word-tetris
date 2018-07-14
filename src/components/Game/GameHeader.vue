@@ -114,6 +114,7 @@ export default {
           clearInterval(timerInterval);
 
           this.$store.dispatch('setTime', this.timer);
+          this.$router.push('/gameover');
         }
 
         this.$store.dispatch('moveDown');
@@ -153,6 +154,7 @@ export default {
           clearInterval(timerInterval);
 
           this.$store.dispatch('setTime', this.timer);
+          this.$router.push('/gameover');
         }
 
         this.$store.dispatch('moveDown');
