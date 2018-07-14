@@ -76,7 +76,6 @@ export default {
     return {
       seconds: 0,
       minutes: 0,
-      hours: 0,
       newGame: true,
     };
   },
@@ -84,9 +83,8 @@ export default {
     timer() {
       const s = (this.seconds < 10) ? `0${this.seconds}` : this.seconds;
       const m = (this.minutes < 10) ? `0${this.minutes}` : this.minutes;
-      const h = (this.hours < 10) ? `0${this.hours}` : this.hours;
 
-      return `${h}:${m}:${s}`;
+      return `${m}:${s}`;
     },
   },
   // TODO: Most of code are repeated in some places
@@ -104,11 +102,6 @@ export default {
         if (this.seconds === 59) {
           this.seconds = 0;
           this.minutes += 1;
-
-          if (this.minutes === 59) {
-            this.minutes = 0;
-            this.hours += 1;
-          }
         }
       }, 1000);
 
