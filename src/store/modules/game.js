@@ -166,8 +166,8 @@ const mutations = {
     state.lastCol = 0;
   },
 
-  GAME_OVER(state) {
-    state.gameOver = true;
+  SET_GAME_OVER(state, status) {
+    state.gameOver = status;
   },
 
   TOGGLE_IS_GAME_RUNNING(state) {
@@ -378,7 +378,7 @@ const actions = {
       checkForMatchWord(commit);
 
       if (state.currentRow === 0 && bottomIsBlock()) {
-        commit('GAME_OVER');
+        commit('SET_GAME_OVER', true);
         console.log('GAME OVER :(');
         return;
       }
@@ -391,6 +391,10 @@ const actions = {
     commit('MOVE_DOWN');
     commit('CLEAR_LAST_BLOCK');
     commit('SET_CURRENT_BLOCK');
+  },
+
+  setGameOver({ commit }, status) {
+    commit('SET_GAME_OVER', status);
   },
 
   resetGame({ commit }) {
