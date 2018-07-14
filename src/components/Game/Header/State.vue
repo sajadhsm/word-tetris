@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'GameHeaderState',
+  name: 'State',
   props: {
     icon: {
       default: 'star',
