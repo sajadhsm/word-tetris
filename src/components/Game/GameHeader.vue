@@ -112,6 +112,8 @@ export default {
           this.$store.dispatch('toggleIsGameRunning'); // true > false
           clearInterval(gameLoopInterval);
           clearInterval(timerInterval);
+
+          this.$store.dispatch('setTime', this.timer);
         }
 
         this.$store.dispatch('moveDown');
@@ -149,6 +151,8 @@ export default {
           this.$store.dispatch('toggleIsGameRunning'); // true > false
           clearInterval(gameLoopInterval);
           clearInterval(timerInterval);
+
+          this.$store.dispatch('setTime', this.timer);
         }
 
         this.$store.dispatch('moveDown');

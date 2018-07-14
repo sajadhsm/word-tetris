@@ -15,6 +15,7 @@ const state = {
   lastCol: 0,
   score: 0,
   matchWords: 0,
+  time: '',
   gameOver: false,
   isGameRunning: false,
 };
@@ -68,6 +69,10 @@ const mutations = {
     state.lastCol = 0;
     state.currentRow = 0;
     state.currentCol = Math.floor((state.cols - 1) / 2);
+  },
+
+  SET_TIME(state, time) {
+    state.time = time;
   },
 
   SET_CURRENT_BLOCK(state) {
@@ -395,6 +400,10 @@ const actions = {
 
   toggleIsGameRunning({ commit }) {
     commit('TOGGLE_IS_GAME_RUNNING');
+  },
+
+  setTime({ commit }, time) {
+    commit('SET_TIME', time);
   },
 };
 
