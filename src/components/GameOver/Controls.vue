@@ -6,7 +6,7 @@
         flip="horizontal"/>
     </button>
 
-    <button>
+    <button @click="goToMainMenu">
       <font-awesome-icon icon="home" />
     </button>
 
@@ -19,6 +19,16 @@
 <script>
 export default {
   name: 'GameOverControls',
+
+  beforeDestroy() {
+    this.$store.dispatch('setGameOver', false);
+  },
+
+  methods: {
+    goToMainMenu() {
+      this.$router.push('/');
+    },
+  },
 };
 </script>
 
