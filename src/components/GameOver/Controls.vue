@@ -10,7 +10,7 @@
       <font-awesome-icon icon="home" />
     </button>
 
-    <button class="button">
+    <button @click="replayGame">
       <font-awesome-icon icon="redo" />
     </button>
   </div>
@@ -27,6 +27,9 @@ export default {
   methods: {
     goToMainMenu() {
       this.$router.push('/');
+    },
+    replayGame() {
+      this.$router.push('/game');
     },
   },
 };
