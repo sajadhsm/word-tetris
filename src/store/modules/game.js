@@ -28,6 +28,7 @@ const getters = {
     const r = Math.floor(Math.random() * state.characters.length);
     return state.characters[r];
   },
+
   time() {
     const s = (state.time.seconds < 10) ?
       `0${state.time.seconds}` : state.time.seconds;

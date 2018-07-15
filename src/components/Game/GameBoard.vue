@@ -44,12 +44,6 @@ export default {
 </script>
 
 <style scoped>
-/* .game-board {
-  padding: 5px;
-  border-radius: 2px;
-  border: 1px solid black;
-  background: rgba(35, 85, 179, 0.438);
-} */
 .row {
   display: flex;
   justify-content: center;

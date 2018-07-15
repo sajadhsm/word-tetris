@@ -93,7 +93,6 @@ export default {
   justify-content: flex-end;
   align-items: center;
   flex-basis: calc(100% / 3);
-  /* background: rgba(137, 43, 226, 0.041); */
 }
 /* Create global class for buttons */
 .game-controls button {

@@ -41,6 +41,7 @@ export default {
   text-align: center;
   min-height: 100vh;
 }
+
 .title {
   padding: 1.5rem 1rem;
   direction: rtl;

@@ -1,6 +1,6 @@
 <template>
   <div class="main-menu">
-    <h1>واژه ماژه</h1>
+    <h1>¯\_(ツ)_/¯</h1>
 
     <router-link
       tag="button"
@@ -22,6 +22,7 @@ export default {
 h1 {
   font-size: 2.8rem;
 }
+
 .main-menu {
   display: flex;
   flex-direction: column;

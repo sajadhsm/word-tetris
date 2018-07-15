@@ -30,6 +30,5 @@ export default {
   max-width: 768px;
   margin: 0 auto;
   padding: 1rem;
-  background: rgba(5, 104, 170, 0.041);
 }
 </style>

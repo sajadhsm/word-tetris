@@ -28,7 +28,6 @@ export default {
   justify-content: center;
   flex-basis: calc(100% / 3);
   padding: 0 5px;
-  /* background: rgba(255, 47, 220, 0.137); */
 }
 /* Decrease GameHeaderStates spacing */
 .game-info > p {

@@ -30,11 +30,6 @@ export default {
     this.$store.commit('SET_WORDS', words);
     this.$store.commit('SET_CHARACTERS');
   },
-
-  destroyed() {
-    console.log('GAME Destroyed! Reset game states here :)');
-    // TODO: Reset game state...!
-  },
 };
 </script>
 
