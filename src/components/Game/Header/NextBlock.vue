@@ -2,7 +2,7 @@
   <div class="next-block-container">
     <div class="next-block">
       <div
-        style="{background-color: 'orangered'}"
+        :style="{backgroundColor: bgColor}"
         class="block">
         {{ $store.state.game.nextChar }}
       </div>
@@ -11,9 +11,16 @@
 </template>
 
 <script>
+import charsBG from '../../../data/charactersBG';
 
 export default {
   name: 'NextBlock',
+
+  computed: {
+    bgColor() {
+      return charsBG[this.$store.state.game.nextChar];
+    },
+  },
 };
 </script>
 
@@ -29,9 +36,9 @@ export default {
   width: 4rem;
   height: 4rem;
   border-radius: 40%;
-  background: #ddd;
-  /* color: #fff; */
-  font-size: 1.5em;
+  background-color: #ddd;
+  color: #fff;
+  font-size: 1.75em;
   font-weight: 700;
   overflow: hidden;
 }
