@@ -77,6 +77,11 @@ export default {
       clearInterval(timerInterval);
 
       this.$store.dispatch('resetGameState');
+      // Works as expected but maybe it's better to reset
+      // excisting objects content rather than recreat and
+      // pushing to the board ?
+      this.$store.dispatch('clearBoard');
+      this.$store.dispatch('setBoard');
     },
   },
 };
