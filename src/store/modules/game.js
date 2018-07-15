@@ -422,6 +422,10 @@ const actions = {
     commit('RESET_GAME_STATE');
   },
 
+  resetGameState({ commit }) {
+    commit('RESET_GAME_STATE');
+  },
+
   setIsGameRunning({ commit }, status) {
     commit('SET_IS_GAME_RUNNING', status);
   },

@@ -26,9 +26,11 @@ export default {
 
   methods: {
     goToMainMenu() {
+      this.$store.dispatch('resetGameState');
       this.$router.push('/');
     },
     replayGame() {
+      this.$store.dispatch('resetGameState');
       this.$router.push('/game');
     },
   },
