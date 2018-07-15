@@ -26,6 +26,15 @@
 <script>
 export default {
   name: 'GameBoard',
+
+  created() {
+    this.$store.dispatch('setBoard');
+  },
+
+  destroyed() {
+    this.$store.dispatch('clearBoard');
+  },
+
   computed: {
     board() {
       return this.$store.state.game.board;

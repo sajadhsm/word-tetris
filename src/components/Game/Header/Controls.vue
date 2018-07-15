@@ -76,7 +76,7 @@ export default {
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
 
-      this.$store.dispatch('resetGame');
+      this.$store.dispatch('resetGameState');
     },
   },
 };

@@ -410,9 +410,12 @@ const actions = {
     commit('SET_GAME_OVER', status);
   },
 
-  resetGame({ commit }) {
+  setBoard({ commit }) {
+    commit('SET_BOARD');
+  },
+
+  clearBoard({ commit }) {
     commit('CLEAR_BOARD');
-    commit('RESET_GAME_STATE');
   },
 
   resetGameState({ commit }) {
