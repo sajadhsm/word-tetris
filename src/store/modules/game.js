@@ -66,6 +66,10 @@ const mutations = {
     }
   },
 
+  CLEAR_BOARD(state) {
+    state.board = [];
+  },
+
   START_GAME(state) {
     state.currentChar = getters.randomChar();
     state.nextChar = getters.randomChar();
@@ -156,17 +160,6 @@ const mutations = {
         }
       }
     });
-  },
-
-  CLEAR_BOARD(state) {
-    for (let i = 0; i < state.rows; i += 1) {
-      for (let j = 0; j < state.cols; j += 1) {
-        Vue.set(state.board[i], j, {
-          content: '',
-          background: '',
-        });
-      }
-    }
   },
 
   RESET_GAME_STATE(state) {
