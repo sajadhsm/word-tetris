@@ -27,6 +27,7 @@ export default new Router({
       component: GameOver,
       beforeEnter(to, from, next) {
         if (store.state.game.gameOver) next();
+        else next('/');
       },
     },
     {
