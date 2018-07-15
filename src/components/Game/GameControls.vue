@@ -57,7 +57,6 @@ export default {
 <style scoped>
 .controls {
   text-align: center;
-  background: rgba(50, 47, 255, 0.041);
   padding: 1rem 0;
 }
 
