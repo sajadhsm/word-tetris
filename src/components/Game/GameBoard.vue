@@ -27,18 +27,18 @@
 export default {
   name: 'GameBoard',
 
+  computed: {
+    board() {
+      return this.$store.state.game.board;
+    },
+  },
+
   created() {
     this.$store.dispatch('setBoard');
   },
 
   destroyed() {
     this.$store.dispatch('clearBoard');
-  },
-
-  computed: {
-    board() {
-      return this.$store.state.game.board;
-    },
   },
 };
 </script>
