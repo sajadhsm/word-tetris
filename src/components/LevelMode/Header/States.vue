@@ -1,10 +1,10 @@
 <template>
   <div class="game-info">
-    <State :icon="'star'">
+    <State :icon="'trophy'">
       {{ $store.getters['levelMode/currentLevelNatural'] | toPersianNum }}
     </State>
 
-    <State :icon="'clock'">
+    <State :icon="'stopwatch'">
       {{ $store.getters.time | toPersianNum }}
     </State>
   </div>

@@ -13,6 +13,8 @@ import {
   faHome,
   faListUl,
   faAngleDoubleRight,
+  faTrophy,
+  faStopwatch,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -27,6 +29,8 @@ library.add(
   faHome,
   faListUl,
   faAngleDoubleRight,
+  faTrophy,
+  faStopwatch,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
