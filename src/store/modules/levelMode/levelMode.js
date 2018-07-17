@@ -159,6 +159,14 @@ const actions = {
     commit('SET_WIN', false);
     commit('SET_LEVEL_CHARACTERS');
   },
+
+  nextLevel({ commit }) {
+    const nextLevel = state.currentLevel + 1;
+
+    if (nextLevel < state.levels.length) {
+      commit('SET_CURRENT_LEVEL', nextLevel);
+    }
+  },
 };
 
 export default {

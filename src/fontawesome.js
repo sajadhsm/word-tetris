@@ -12,6 +12,7 @@ import {
   faClock,
   faHome,
   faListUl,
+  faAngleDoubleRight,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -25,6 +26,7 @@ library.add(
   faClock,
   faHome,
   faListUl,
+  faAngleDoubleRight,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

@@ -1,17 +1,15 @@
 <template>
   <div class="controls">
-    <button>
-      <font-awesome-icon
-        icon="list-ul"
-        flip="horizontal"/>
+    <button @click="replayGame">
+      <font-awesome-icon icon="redo" />
     </button>
 
     <button @click="goToMainMenu">
       <font-awesome-icon icon="home" />
     </button>
 
-    <button @click="replayGame">
-      <font-awesome-icon icon="redo" />
+    <button @click="nextLevel">
+      <font-awesome-icon icon="angle-double-right" />
     </button>
   </div>
 </template>
@@ -31,6 +29,14 @@ export default {
     },
     replayGame() {
       this.$router.push('/levelmode');
+      this.$store.dispatch('resetGlobalStates');
+      this.$store.dispatch('levelMode/resetStates');
+    },
+    nextLevel() {
+      this.$store.dispatch('levelMode/nextLevel');
+
+      this.$router.push('/levelmode');
+
       this.$store.dispatch('resetGlobalStates');
       this.$store.dispatch('levelMode/resetStates');
     },
