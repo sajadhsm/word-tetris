@@ -1,12 +1,22 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import game from './modules/game';
+import state from './state';
+import * as getters from './getters';
+import * as mutations from './mutations';
+import * as actions from './actions';
+
+import freeMode from './modules/freeMode/freeMode';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  state,
+  getters,
+  mutations,
+  actions,
+
   modules: {
-    game,
+    freeMode,
   },
 });
