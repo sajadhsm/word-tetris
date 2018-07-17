@@ -1,5 +1,5 @@
 export default {
-  gameMode: 'levelMode',
+  gameMode: 'freeMode',
   board: [],
   cols: 7,
   rows: 7,

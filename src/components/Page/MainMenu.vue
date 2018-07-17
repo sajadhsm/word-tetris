@@ -2,19 +2,28 @@
   <div class="main-menu">
     <h1>¯\_(ツ)_/¯</h1>
 
-    <router-link
+    <div class="buttons">
+      <router-link
       :to="$store.state.gameMode"
       tag="button">شروع</router-link>
 
-    <button>جدول امتیازات</button>
+      <GameModeSelector />
 
-    <button>تنظیمات</button>
+      <button>جدول امتیازات</button>
+
+      <button>تنظیمات</button>
+    </div>
   </div>
 </template>
 
 <script>
+import GameModeSelector from './GameModeSelector.vue';
+
 export default {
   name: 'MainMenu',
+  components: {
+    GameModeSelector,
+  },
 };
 </script>
 
@@ -31,8 +40,12 @@ h1 {
   min-height: 100vh;
 }
 
+.buttons {
+  max-width: 12.5rem;
+}
+
 .main-menu button {
-  min-width: 200px;
+  width: 100%;
   padding: 10px 15px;
   margin-bottom: 10px;
   background: #fff;

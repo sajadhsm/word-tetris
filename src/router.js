@@ -18,7 +18,7 @@ export default new Router({
       component: MainMenu,
     },
     {
-      path: '/game',
+      path: '/freemode',
       name: 'game-panel',
       component: Game,
     },
