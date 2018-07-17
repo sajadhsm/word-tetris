@@ -5,7 +5,7 @@ import Game from '@/components/Game/Game.vue';
 import LevelMode from '@/components/LevelMode/LevelMode.vue';
 import MainMenu from '@/components/Page/MainMenu.vue';
 import GameOver from '@/components/GameOver/GameOver.vue';
-
+import LevelWin from '@/components/LevelMode/LevelWin/LevelWin.vue';
 import store from './store/store';
 
 Vue.use(Router);
@@ -33,6 +33,15 @@ export default new Router({
           store.commit('SET_GAME_MODE', 'levelMode');
         }
         next();
+      },
+    },
+    {
+      path: '/levelwin',
+      name: 'level-win',
+      component: LevelWin,
+      beforeEnter(to, from, next) {
+        if (store.state.levelMode.win) next();
+        else next('/');
       },
     },
     {
