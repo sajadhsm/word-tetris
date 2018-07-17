@@ -42,9 +42,22 @@ export default {
 
       this.$store.dispatch('setIsGameRunning', true);
 
-      timerInterval = setInterval(() => (
-        this.$store.dispatch('increaseTime')
-      ), 1000);
+      timerInterval = setInterval(() => {
+        if (
+          !this.$store.state.time.seconds &&
+          !this.$store.state.time.minutes
+        ) {
+          this.newGame = true;
+          this.$store.dispatch('setIsGameRunning', false);
+          this.$store.dispatch('setGameOver', true);
+
+          clearInterval(gameLoopInterval);
+          clearInterval(timerInterval);
+
+          this.$router.push('/gameover');
+        }
+        this.$store.dispatch('decreaseTime')
+      }, 1000);
 
       gameLoopInterval = setInterval(() => {
         if (this.$store.state.levelMode.win) {
@@ -56,6 +69,7 @@ export default {
 
 
           console.log('WINNNNNNNNNNNNN!');
+          this.$router.push('/levelwin');
         }
 
         if (this.$store.state.gameOver) {
@@ -88,6 +102,7 @@ export default {
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
 
+      // NEED FIX: This will reset the time in level mode
       this.$store.dispatch('resetGlobalStates');
       this.$store.dispatch('levelMode/resetStates');
       // Works as expected but maybe it's better to reset

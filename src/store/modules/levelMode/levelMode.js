@@ -20,6 +20,18 @@ const getters = {
   levelWordLen() {
     return state.levelCharacters.length;
   },
+
+  levelTime() {
+    return state.levels[state.currentLevel].time;
+  },
+
+  levelWord() {
+    return state.levels[state.currentLevel].word;
+  },
+
+  currentLevelNatural() {
+    return state.currentLevel + 1;
+  },
 };
 
 const mutations = {

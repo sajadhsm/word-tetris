@@ -29,6 +29,9 @@ export default {
     // Change the board size to fit the word length
     const wordLen = this.$store.getters['levelMode/levelWordLen'];
     this.$store.commit('SET_COLS', wordLen);
+
+    const levelTime = this.$store.getters['levelMode/levelTime'];
+    this.$store.commit('SET_TIME', levelTime);
   },
 };
 </script>

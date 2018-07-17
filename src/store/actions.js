@@ -2,6 +2,10 @@ export const increaseTime = ({ commit }) => {
   commit('INCREASE_TIME');
 };
 
+export const decreaseTime = ({ commit }) => {
+  commit('DECREASE_TIME');
+};
+
 export const setGameOver = ({ commit }, status) => {
   commit('SET_GAME_OVER', status);
 };

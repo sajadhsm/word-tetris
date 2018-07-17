@@ -122,3 +122,12 @@ export const INCREASE_TIME = (state) => {
     state.time.minutes += 1;
   }
 };
+
+export const DECREASE_TIME = (state) => {
+  if (state.time.seconds === 0) {
+    state.time.seconds = 60;
+    state.time.minutes -= 1;
+  }
+
+  state.time.seconds -= 1;
+};
