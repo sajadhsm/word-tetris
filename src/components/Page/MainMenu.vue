@@ -3,8 +3,8 @@
     <h1>¯\_(ツ)_/¯</h1>
 
     <router-link
-      tag="button"
-      to="/game">شروع</router-link>
+      :to="$store.state.gameMode"
+      tag="button">شروع</router-link>
 
     <button>جدول امتیازات</button>
 

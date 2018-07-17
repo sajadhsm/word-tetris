@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Game from '@/components/Game/Game.vue';
+import LevelMode from '@/components/LevelMode/LevelMode.vue';
 import MainMenu from '@/components/Page/MainMenu.vue';
 import GameOver from '@/components/GameOver/GameOver.vue';
 
@@ -20,6 +21,19 @@ export default new Router({
       path: '/game',
       name: 'game-panel',
       component: Game,
+    },
+    {
+      path: '/levelmode',
+      name: 'level-mode',
+      component: LevelMode,
+      beforeEnter(to, from, next) {
+        // Force game mode change
+        // Maybe a better solution?
+        if (store.state.gameMode !== 'levelMode') {
+          store.commit('SET_GAME_MODE', 'levelMode');
+        }
+        next();
+      },
     },
     {
       path: '/gameover',

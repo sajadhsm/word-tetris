@@ -7,6 +7,7 @@ import * as mutations from './mutations';
 import * as actions from './actions';
 
 import freeMode from './modules/freeMode/freeMode';
+import levelMode from './modules/levelMode/levelMode';
 
 Vue.use(Vuex);
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
 
   modules: {
     freeMode,
+    levelMode,
   },
 });
