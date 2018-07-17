@@ -29,7 +29,7 @@ export default {
 
   computed: {
     board() {
-      return this.$store.state.game.board;
+      return this.$store.state.board;
     },
   },
 

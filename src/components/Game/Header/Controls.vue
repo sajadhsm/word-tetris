@@ -7,7 +7,7 @@
     </button>
 
     <button
-      v-if="!$store.state.game.isGameRunning"
+      v-if="!$store.state.isGameRunning"
       class="button"
       @click="startGame">
       <font-awesome-icon icon="play" />
@@ -37,7 +37,7 @@ export default {
     startGame() {
       if (this.newGame) {
         this.newGame = false;
-        this.$store.dispatch('startGame');
+        this.$store.dispatch('freeMode/initialStart');
       }
 
       this.$store.dispatch('setIsGameRunning', true);
@@ -48,7 +48,7 @@ export default {
 
       gameLoopInterval = setInterval(() => {
         // Wrap it info function
-        if (this.$store.state.game.gameOver) {
+        if (this.$store.state.gameOver) {
           this.newGame = true;
           this.$store.dispatch('setIsGameRunning', false);
 
@@ -58,7 +58,7 @@ export default {
           this.$router.push('/gameover');
         }
 
-        this.$store.dispatch('moveDown');
+        this.$store.dispatch('freeMode/moveDown');
       }, 500);
     },
 
@@ -71,12 +71,15 @@ export default {
 
     resetGame() {
       this.newGame = true;
+      // SET_IS_GAME_RUNNING is commited in the resetGlobalState
+      // Remove it later...
       this.$store.dispatch('setIsGameRunning', false);
 
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
 
-      this.$store.dispatch('resetGameState');
+      this.$store.dispatch('resetGlobalStates');
+      this.$store.dispatch('freeMode/resetStates');
       // Works as expected but maybe it's better to reset
       // excisting objects content rather than recreat and
       // pushing to the board ?

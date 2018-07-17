@@ -21,10 +21,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
   name: 'GameControls',
+
+  computed: {
+    // Will be used as a way to determine the current game mode
+    nameSpace() {
+      return this.$store.state.gameMode;
+    },
+  },
 
   created() {
     window.addEventListener('keydown', this.moveBlock);
@@ -35,18 +40,23 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'moveLeft',
-      'moveRight',
-      'moveDown',
-    ]),
+    // Call the current game mode block movement actions
+    moveLeft() {
+      this.$store.dispatch(`${this.nameSpace}/moveLeft`);
+    },
+    moveRight() {
+      this.$store.dispatch(`${this.nameSpace}/moveRight`);
+    },
+    moveDown() {
+      this.$store.dispatch(`${this.nameSpace}/moveDown`);
+    },
 
     moveBlock(event) {
-      if (event.keyCode === 40) {
+      if (event.keyCode === 40) { // Down arrow
         this.moveDown();
-      } else if (event.keyCode === 39) {
+      } else if (event.keyCode === 39) { // Right arrow
         this.moveRight();
-      } else if (event.keyCode === 37) {
+      } else if (event.keyCode === 37) { // Left arrow
         this.moveLeft();
       }
     },

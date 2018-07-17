@@ -27,8 +27,10 @@ export default {
     // Or no maybe we need to set words seprately for each game mode
     // for now keep it here but REMEMBER: It is called every time
     // and the call value is heavy (7000 words...)
-    this.$store.commit('SET_WORDS', words);
-    this.$store.commit('SET_CHARACTERS');
+
+    // NOTE: Currectly just works for the freeMode
+    this.$store.commit('freeMode/SET_WORDS', words);
+    this.$store.commit('freeMode/SET_CHARACTERS');
   },
 };
 </script>

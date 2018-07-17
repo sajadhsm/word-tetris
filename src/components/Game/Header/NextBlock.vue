@@ -4,7 +4,7 @@
       <div
         :style="{backgroundColor: bgColor}"
         class="block">
-        {{ $store.state.game.nextChar }}
+        {{ $store.state.nextChar }}
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@ export default {
 
   computed: {
     bgColor() {
-      return charsBG[this.$store.state.game.nextChar];
+      return charsBG[this.$store.state.nextChar];
     },
   },
 };

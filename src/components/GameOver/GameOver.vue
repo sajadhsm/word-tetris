@@ -4,11 +4,11 @@
 
     <div class="game-info">
       <Info title="امتیاز">
-        {{ $store.state.game.score | toPersianNum }}
+        {{ $store.state.freeMode.score | toPersianNum }}
       </Info>
 
       <Info title="تعداد کلمات">
-        {{ $store.state.game.matchWords | toPersianNum }}
+        {{ $store.state.freeMode.matchWords | toPersianNum }}
       </Info>
 
       <Info title="زمان">

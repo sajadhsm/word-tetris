@@ -21,16 +21,15 @@ export default {
   name: 'GameOverControls',
 
   beforeDestroy() {
-    this.$store.dispatch('setGameOver', false);
+    this.$store.dispatch('resetGlobalStates');
+    this.$store.dispatch('freeMode/resetStates');
   },
 
   methods: {
     goToMainMenu() {
-      this.$store.dispatch('resetGameState');
       this.$router.push('/');
     },
     replayGame() {
-      this.$store.dispatch('resetGameState');
       this.$router.push('/game');
     },
   },

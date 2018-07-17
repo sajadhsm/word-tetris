@@ -1,7 +1,7 @@
 <template>
   <div class="game-info">
     <State :icon="'star'">
-      {{ $store.state.game.score | toPersianNum }}
+      {{ $store.state.freeMode.score | toPersianNum }}
     </State>
 
     <State :icon="'clock'">
