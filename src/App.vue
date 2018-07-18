@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <div class="game-container">
+    <transition
+      name="fade"
+      mode="out-in">
       <router-view/>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +37,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   background-color: #f9f9f9;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.23s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.25);
 }
 
 .col {
