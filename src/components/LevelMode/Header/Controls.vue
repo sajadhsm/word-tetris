@@ -56,14 +56,14 @@ export default {
 
           this.$router.push('/gameover');
         }
-        this.$store.dispatch('decreaseTime')
+        this.$store.dispatch('decreaseTime');
       }, 1000);
 
       gameLoopInterval = setInterval(() => {
         if (this.$store.state.levelMode.win) {
           clearInterval(gameLoopInterval);
           clearInterval(timerInterval);
-          
+
           this.newGame = true;
           this.$store.dispatch('setIsGameRunning', false);
 

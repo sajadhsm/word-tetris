@@ -1,17 +1,17 @@
 <template>
   <div class="hint">
-    <p v-if="this.level.type === 'idiom'">
+    <p v-if="level.type === 'idiom'">
       <span class="prefix">{{ level.hint.prefix }}</span>
       <span class="mystery"> {{ mysteryWord }} </span>
       <span class="sufix">{{ level.hint.sufix }}</span>
     </p>
 
-    <p v-else-if="this.level.type === 'opposite'">
+    <p v-else-if="level.type === 'opposite'">
       <span>{{ level.hint }} != </span>
       <span class="mystery"> {{ mysteryWord }} </span>
     </p>
 
-    <p v-else-if="this.level.type === 'synonym'">
+    <p v-else-if="level.type === 'synonym'">
       <span>{{ level.hint }} = </span>
       <span class="mystery">{{ mysteryWord }}</span>
     </p>
