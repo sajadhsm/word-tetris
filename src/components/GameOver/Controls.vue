@@ -27,10 +27,10 @@ export default {
 
   methods: {
     goToMainMenu() {
-      this.$router.push('/');
+      this.$router.push({ name: 'main-menu' });
     },
     replayGame() {
-      this.$router.push('/game');
+      this.$router.push({ name: 'free-mode' });
     },
   },
 };

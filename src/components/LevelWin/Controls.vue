@@ -23,12 +23,12 @@ export default {
   // SET_TIME -> ZERO
   methods: {
     goToMainMenu() {
-      this.$router.push('/');
+      this.$router.push({ name: 'main-menu' });
       this.$store.dispatch('resetGlobalStates');
       this.$store.dispatch('levelMode/resetStates');
     },
     replayGame() {
-      this.$router.push('/levelmode');
+      this.$router.push({ name: 'level-mode' });
       this.$store.dispatch('resetGlobalStates');
       this.$store.dispatch('levelMode/resetStates');
     },
@@ -40,7 +40,7 @@ export default {
       this.$store.dispatch('levelMode/nextLevel');
       localStorage.setItem('currentLevel', this.$store.state.levelMode.currentLevel);
 
-      this.$router.push('/levelmode');
+      this.$router.push({ name: 'level-mode' });
 
       this.$store.dispatch('resetGlobalStates');
       this.$store.dispatch('levelMode/resetStates');
