@@ -124,7 +124,12 @@ export const INCREASE_TIME = (state) => {
 };
 
 export const DECREASE_TIME = (state) => {
-  if (state.time.seconds === 0) {
+  const s = state.time.seconds;
+  const m = state.time.minutes;
+  // If the time is invalid don't do any thing!
+  if (s <= 0 && m <= 0) return;
+
+  if (s === 0) {
     state.time.seconds = 60;
     state.time.minutes -= 1;
   }
