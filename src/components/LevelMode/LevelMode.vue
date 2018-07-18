@@ -37,6 +37,16 @@ export default {
 
     const levelTime = this.$store.getters['levelMode/levelTime'];
     this.$store.commit('SET_TIME', levelTime);
+
+    // Load current level from local storage
+    if (localStorage.getItem('currentLevel')) {
+      try {
+        const lvl = parseInt(localStorage.getItem('currentLevel'), 10);
+        this.$store.commit('levelMode/SET_CURRENT_LEVEL', lvl);
+      } catch (e) {
+        localStorage.removeItem('currentLevel');
+      }
+    }
   },
 };
 </script>

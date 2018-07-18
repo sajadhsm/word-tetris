@@ -20,7 +20,7 @@ export default {
 
   // Destroy is called after other component creation...
   // So should reset the state by methods to avoid
-  // SET_TIME -> ZERO 
+  // SET_TIME -> ZERO
   methods: {
     goToMainMenu() {
       this.$router.push('/');
@@ -33,7 +33,12 @@ export default {
       this.$store.dispatch('levelMode/resetStates');
     },
     nextLevel() {
+      // NOTE: The level is updated just by this button
+      // It should happens when the win component is created
+      // then should find a way to be able to replay the same level
+      // or select from previous levels!
       this.$store.dispatch('levelMode/nextLevel');
+      localStorage.setItem('currentLevel', this.$store.state.levelMode.currentLevel);
 
       this.$router.push('/levelmode');
 
