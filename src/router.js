@@ -6,6 +6,7 @@ import LevelMode from '@/components/LevelMode/LevelMode.vue';
 import MainMenu from '@/components/MainMenu/MainMenu.vue';
 import GameOver from '@/components/GameOver/GameOver.vue';
 import LevelWin from '@/components/LevelWin/LevelWin.vue';
+
 import store from './store/store';
 
 Vue.use(Router);
@@ -19,7 +20,7 @@ export default new Router({
     },
     {
       path: '/freemode',
-      name: 'game-panel',
+      name: 'free-mode',
       component: FreeMode,
     },
     {
