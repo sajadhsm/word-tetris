@@ -28,16 +28,6 @@ export default {
   },
 
   created() {
-    this.$store.commit('levelMode/SET_LEVELS', levels);
-    this.$store.commit('levelMode/SET_LEVEL_CHARACTERS');
-
-    // Change the board size to fit the word length
-    const wordLen = this.$store.getters['levelMode/levelWordLen'];
-    this.$store.commit('SET_COLS', wordLen);
-
-    const levelTime = this.$store.getters['levelMode/levelTime'];
-    this.$store.commit('SET_TIME', levelTime);
-
     // Load current level from local storage
     if (localStorage.getItem('currentLevel')) {
       try {
@@ -47,6 +37,16 @@ export default {
         localStorage.removeItem('currentLevel');
       }
     }
+
+    this.$store.commit('levelMode/SET_LEVELS', levels);
+    this.$store.commit('levelMode/SET_LEVEL_CHARACTERS');
+
+    // Change the board size to fit the word length
+    const wordLen = this.$store.getters['levelMode/levelWordLen'];
+    this.$store.commit('SET_COLS', wordLen);
+
+    const levelTime = this.$store.getters['levelMode/levelTime'];
+    this.$store.commit('SET_TIME', levelTime);
   },
 };
 </script>
