@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import charsBG from '../../../data/charactersBG';
+import charsBG from '../../data/charactersBG';
 
 export default {
   name: 'NextBlock',

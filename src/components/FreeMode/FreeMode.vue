@@ -8,8 +8,8 @@
 
 <script>
 import GameHeader from './Header/GameHeader.vue';
-import GameBoard from './GameBoard.vue';
-import GameControls from './GameControls.vue';
+import GameBoard from '../shared/GameBoard.vue';
+import GameControls from '../shared/GameControls.vue';
 import words from '../../data/words';
 
 export default {

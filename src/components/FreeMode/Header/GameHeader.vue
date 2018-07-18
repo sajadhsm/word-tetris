@@ -11,7 +11,7 @@
 <script>
 import States from './States.vue';
 import Controls from './Controls.vue';
-import NextBlock from './NextBlock.vue';
+import NextBlock from '../../shared/NextBlock.vue';
 
 export default {
   name: 'GameHeader',

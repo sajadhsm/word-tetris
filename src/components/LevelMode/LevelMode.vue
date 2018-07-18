@@ -11,8 +11,8 @@
 
 <script>
 import GameHeader from './Header/GameHeader.vue';
-import GameBoard from '../Game/GameBoard.vue';
-import GameControls from '../Game/GameControls.vue';
+import GameBoard from '../shared/GameBoard.vue';
+import GameControls from '../shared/GameControls.vue';
 import Hint from './Hint/Hint.vue';
 
 import levels from '../../data/levels';

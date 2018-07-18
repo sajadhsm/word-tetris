@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import GameOverInfo from './Info.vue';
+import GameOverInfo from '../shared/Info.vue';
 import GameOverControls from './Controls.vue';
 
 export default {

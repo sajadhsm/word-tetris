@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import State from './State.vue';
+import State from '../../shared/State.vue';
 
 export default {
   name: 'States',
