@@ -36,6 +36,13 @@ export default {
       return modesNameMap[this.$store.state.gameMode];
     },
   },
+
+  created() {
+    // Set the index according to state.gameMode
+    // to fix the need for double click to change the mode
+    this.index = this.modes.indexOf(this.$store.state.gameMode);
+  },
+
   methods: {
     nextGameMode() {
       this.index += 1;
@@ -85,5 +92,9 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
+  transition: background .23s;
+}
+button:hover {
+  background: rgba(221, 221, 221, 0.192);
 }
 </style>
