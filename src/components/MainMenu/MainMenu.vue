@@ -4,8 +4,8 @@
 
     <div class="buttons">
       <router-link
-      :to="$store.state.gameMode"
-      tag="button">شروع</router-link>
+        :to="$store.state.gameMode"
+        tag="button">شروع</router-link>
 
       <GameModeSelector />
 

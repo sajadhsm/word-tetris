@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Game from '@/components/Game/Game.vue';
 import LevelMode from '@/components/LevelMode/LevelMode.vue';
-import MainMenu from '@/components/Page/MainMenu.vue';
+import MainMenu from '@/components/MainMenu/MainMenu.vue';
 import GameOver from '@/components/GameOver/GameOver.vue';
 import LevelWin from '@/components/LevelMode/LevelWin/LevelWin.vue';
 import store from './store/store';
