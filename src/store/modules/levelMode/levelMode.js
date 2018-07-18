@@ -32,6 +32,10 @@ const getters = {
   currentLevelNatural() {
     return state.currentLevel + 1;
   },
+
+  currentLevelObject() {
+    return state.levels[state.currentLevel];
+  },
 };
 
 const mutations = {

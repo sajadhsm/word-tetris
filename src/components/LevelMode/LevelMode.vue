@@ -1,6 +1,9 @@
 <template>
   <div class="game">
-    <GameHeader />
+    <div class="header-and-hint">
+      <GameHeader />
+      <Hint :level="$store.getters['levelMode/currentLevelObject']"/>
+    </div>
     <GameBoard />
     <GameControls />
   </div>
@@ -10,6 +13,7 @@
 import GameHeader from './Header/GameHeader.vue';
 import GameBoard from '../Game/GameBoard.vue';
 import GameControls from '../Game/GameControls.vue';
+import Hint from './Hint/Hint.vue';
 
 import levels from '../../data/levels';
 
@@ -20,6 +24,7 @@ export default {
     GameHeader,
     GameBoard,
     GameControls,
+    Hint,
   },
 
   created() {
