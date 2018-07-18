@@ -10,12 +10,16 @@
         :key="j"
         class="col">
 
-        <div
-          v-if="col.content !== ''"
-          :style="{ background: col.background }"
-          class="block">
-          {{ col.content }}
-        </div>
+        <transition
+          name="fade"
+          mode="out-in">
+          <div
+            v-if="col.content !== ''"
+            :style="{ background: col.background }"
+            class="block">
+            {{ col.content }}
+          </div>
+        </transition>
 
       </div>
 
@@ -73,6 +77,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
+  border-radius: 42%;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
 }
 </style>
