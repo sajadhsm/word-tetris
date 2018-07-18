@@ -31,6 +31,11 @@ export default {
     // NOTE: Currectly just works for the freeMode
     this.$store.commit('freeMode/SET_WORDS', words);
     this.$store.commit('freeMode/SET_CHARACTERS');
+
+    // Quick fix for change between modes board size change bug
+    // Use a better solution
+    this.$store.commit('SET_COLS', 7);
+    this.$store.commit('SET_ROWS', 7);
   },
 };
 </script>
