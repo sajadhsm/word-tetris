@@ -8,6 +8,7 @@ const state = {
 };
 
 const getters = {
+  /** return a random character from state.characters */
   randomChar() {
     const r = Math.floor(Math.random() * state.characters.length);
     return state.characters[r];
@@ -19,7 +20,11 @@ const mutations = {
     state.words = words;
   },
 
+  /** Extract all unique characters used in state.words */
   SET_CHARACTERS(state) {
+    // if it's already sat no need to refill
+    if (state.characters.length) return;
+
     state.characters = state.words.reduce((chars, word) => {
       word.split('').forEach((char) => {
         if (!chars.includes(char)) chars.push(char);
@@ -52,17 +57,6 @@ const actions = {
       logic.leftIsBlock(rootState)
     ) return;
 
-    if (
-      logic.leftIsBlock(rootState) &&
-      logic.bottomIsBlock(rootState)
-    ) {
-      dispatch('setSpawnLocation', null, { root: true });
-      commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
-      commit('SET_NEXT_CHAR', getters.randomChar(), { root: true });
-      commit('SET_CURRENT_BLOCK', null, { root: true });
-      return;
-    }
-
     dispatch('blockToLeft', null, { root: true });
     commit('CLEAR_LAST_BLOCK', null, { root: true });
     commit('SET_CURRENT_BLOCK', null, { root: true });
@@ -74,17 +68,6 @@ const actions = {
       logic.rightIsWall(rootState) ||
       logic.rightIsBlock(rootState)
     ) return;
-
-    if (
-      logic.rightIsBlock(rootState) &&
-      logic.bottomIsBlock(rootState)
-    ) {
-      dispatch('setSpawnLocation', null, { root: true });
-      commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
-      commit('SET_NEXT_CHAR', getters.randomChar(), { root: true });
-      commit('SET_CURRENT_BLOCK', null, { root: true });
-      return;
-    }
 
     dispatch('blockToRight', null, { root: true });
     commit('CLEAR_LAST_BLOCK', null, { root: true });
