@@ -11,7 +11,9 @@
 
       <button>جدول امتیازات</button>
 
-      <button>تنظیمات</button>
+      <router-link
+        :to="{ name: 'settings' }"
+        tag="button">تنظیمات</router-link>
     </div>
   </div>
 </template>

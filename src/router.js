@@ -6,6 +6,7 @@ import LevelMode from '@/components/LevelMode/LevelMode.vue';
 import MainMenu from '@/components/MainMenu/MainMenu.vue';
 import GameOver from '@/components/GameOver/GameOver.vue';
 import LevelWin from '@/components/LevelWin/LevelWin.vue';
+import Settings from '@/components/SettingsPage/Settings.vue';
 
 import store from './store/store';
 
@@ -53,6 +54,11 @@ export default new Router({
         if (store.state.gameOver) next();
         else next('/');
       },
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings,
     },
     {
       path: '*', // 404 Handle (Back to main menu)
