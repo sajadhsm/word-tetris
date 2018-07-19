@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import charsBG from '../data/charactersBG';
 
+// If in any situation failed to load charBG
+// background color will falls back to this color!
+const blockFallBackBGColor = '#616161';
+
 export const SET_GAME_MODE = (state, mode) => {
   state.gameMode = mode;
 };
@@ -62,11 +66,9 @@ export const SET_GAME_OVER = (state, status) => {
 };
 
 export const SET_CURRENT_BLOCK = (state) => {
-  // Work on this... Read reactivty of vuejs...
-  // Must be a better way of doing this
   Vue.set(state.board[state.currentRow], state.currentCol, {
     content: state.currentChar,
-    background: charsBG[state.currentChar] || 'orangered',
+    background: charsBG[state.currentChar] || blockFallBackBGColor,
   });
 };
 
@@ -78,7 +80,7 @@ export const CLEAR_LAST_BLOCK = (state) => {
 };
 
 export const CLEAR_WORD_BLOCKS = (state, blocks) => {
-  console.log('CLEAR', blocks);
+  // First clear the given blocks
   blocks.forEach((block) => {
     Vue.set(state.board[block.row], block.col, {
       content: '',
@@ -87,17 +89,20 @@ export const CLEAR_WORD_BLOCKS = (state, blocks) => {
 
     // Shift top blocks one block to bottom
     let upperBlock = block.row - 1;
-    // if it's the top most row
+    // if it's the top most row (No need for shift)
     if (upperBlock < 0) return;
 
+    // Start replacing underneath block content with
+    // top block
     while (state.board[upperBlock][block.col].content !== '') {
       const blk = state.board[upperBlock][block.col];
       Vue.set(state.board[upperBlock + 1], block.col, {
         content: blk.content,
-        background: charsBG[blk.content] || 'orangered',
+        background: charsBG[blk.content] || blockFallBackBGColor,
       });
 
       upperBlock -= 1;
+
       // Only clear the top most block
       if (state.board[upperBlock][block.col].content === '') {
         Vue.set(state.board[upperBlock + 1], block.col, {
