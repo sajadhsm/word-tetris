@@ -1,18 +1,24 @@
 <template>
   <div class="controls">
-    <button @click="moveLeft">
+    <button
+      class="button"
+      @click="moveLeft">
       <font-awesome-icon
         icon="angle-left"
         size="2x"/>
     </button>
 
-    <button @click="moveDown">
+    <button
+      class="button"
+      @click="moveDown">
       <font-awesome-icon
         icon="angle-down"
         size="2x"/>
     </button>
 
-    <button @click="moveRight">
+    <button
+      class="button"
+      @click="moveRight">
       <font-awesome-icon
         icon="angle-right"
         size="2x"/>
@@ -66,18 +72,12 @@ export default {
 
 <style scoped>
 .controls {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   padding: 1rem 0;
 }
 
-.controls button {
-  width: 3rem;
-  height: 3rem;
-  margin: 0 1rem;
-  background: #fff;
-  border: 5px solid #ddd;
-  border-radius: 43%;
-  cursor: pointer;
-  outline: none;
+.button {
+  margin: 0 0.5rem;
 }
 </style>

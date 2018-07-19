@@ -97,20 +97,8 @@ export default {
   align-items: center;
   flex-basis: calc(100% / 3);
 }
-/* Create global class for buttons */
-.game-controls button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3.25rem;
-  height: 3.25rem;
-  background: #fff;
-  border: 5px solid #ddd;
-  border-radius: 43%;
-  cursor: pointer;
-  outline: none;
-}
-.game-controls button:last-child {
+
+.button:last-child {
   margin-left: 0.75rem;
 }
 </style>

@@ -5,8 +5,11 @@
       <div>
         <router-link
           :to="{ name: 'main-menu' }"
-          tag="button">
-          <font-awesome-icon icon="angle-left" />
+          tag="button"
+          class="button">
+          <font-awesome-icon
+            icon="angle-left"
+            size="2x" />
         </router-link>
       </div>
     </div>
@@ -16,8 +19,6 @@
 <script>
 export default {
   name: 'Header',
-  components: {
-  },
 };
 </script>
 

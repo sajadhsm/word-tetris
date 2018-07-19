@@ -10,6 +10,7 @@ body {
   background-color: #f9f9f9;
 }
 
+/* <transition /> animation classes */
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.23s;
@@ -20,6 +21,21 @@ body {
   transform: scale(0.25);
 }
 
+/* Buttons with icon content style */
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  background: #fff;
+  border: 0.27rem solid #ddd;
+  border-radius: 43%;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Character block wrapper div class */
 .col {
   width: 2.5rem;
   height: 2.5rem;
