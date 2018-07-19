@@ -66,15 +66,12 @@ export default {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-
   width: 100%;
   margin-bottom: 10px;
-
   background: #fff;
+  color: inherit;
   border: 5px solid #ddd;
-
   border-radius: 20px;
-
   font-weight: 700;
   font-size: 1.2rem;
   overflow: hidden;
@@ -89,6 +86,7 @@ button {
   box-sizing: border-box;
   padding: 10px 0;
   background: transparent;
+  color: inherit;
   border: none;
   outline: none;
   cursor: pointer;

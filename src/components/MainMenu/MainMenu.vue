@@ -5,15 +5,17 @@
     <div class="buttons">
       <router-link
         :to="$store.state.gameMode"
-        tag="button">شروع</router-link>
+        tag="button"
+        class="menu-button">شروع</router-link>
 
       <GameModeSelector />
 
-      <button>جدول امتیازات</button>
+      <button class="menu-button">جدول امتیازات</button>
 
       <router-link
         :to="{ name: 'settings' }"
-        tag="button">تنظیمات</router-link>
+        tag="button"
+        class="menu-button">تنظیمات</router-link>
     </div>
   </div>
 </template>
@@ -51,6 +53,7 @@ h1 {
   padding: 10px 15px;
   margin-bottom: 10px;
   background: #fff;
+  color: inherit;
   border: 5px solid #ddd;
   border-radius: 20px;
   font-weight: 700;

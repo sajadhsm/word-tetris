@@ -35,13 +35,13 @@ export default {
     },
 
     setLightTheme() {
-      console.log('LIGHT THEME');
+      const app = document.querySelector('#app');
+      app.className = '';
     },
 
     setDarkTheme() {
-      console.log('DARK THEME');
-      // document.body.style.background = 'rgb(38, 40, 51)';
-      // document.body.style.color = '#fff';
+      const app = document.querySelector('#app');
+      app.className = 'dark';
     },
   },
 };
@@ -51,7 +51,6 @@ export default {
 .options {
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: center;
   /* fill the space under Header */
   flex: 1;
