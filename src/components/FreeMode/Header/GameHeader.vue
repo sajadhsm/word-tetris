@@ -10,15 +10,15 @@
 
 <script>
 import States from './States.vue';
-import Controls from './Controls.vue';
 import NextBlock from '../../shared/NextBlock.vue';
+import GameHeaderControls from '../../shared/GameHeaderControls.vue';
 
 export default {
   name: 'GameHeader',
   components: {
     States,
-    Controls,
     NextBlock,
+    Controls: GameHeaderControls,
   },
 };
 </script>

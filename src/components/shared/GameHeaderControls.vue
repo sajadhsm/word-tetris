@@ -27,62 +27,64 @@ let timerInterval;
 let gameLoopInterval;
 
 export default {
-  name: 'Controls',
+  name: 'GameHeaderControls',
   data() {
     return {
       newGame: true,
     };
   },
+  computed: {
+    mode() {
+      return this.$store.state.gameMode;
+    },
+  },
   methods: {
+    endGame(status) {
+      this.newGame = true;
+      this.$store.dispatch('setIsGameRunning', false);
+      this.$store.dispatch('setGameOver', true);
+
+      clearInterval(gameLoopInterval);
+      clearInterval(timerInterval);
+
+      const name = status === 'win'
+        ? 'level-win' : 'game-over';
+
+      this.$router.push({ name });
+    },
     startGame() {
       if (this.newGame) {
         this.newGame = false;
-        this.$store.dispatch('levelMode/initialStart');
+        this.$store.dispatch(`${this.mode}/initialStart`);
       }
 
       this.$store.dispatch('setIsGameRunning', true);
 
       timerInterval = setInterval(() => {
-        if (
-          !this.$store.state.time.seconds &&
-          !this.$store.state.time.minutes
-        ) {
-          this.newGame = true;
-          this.$store.dispatch('setIsGameRunning', false);
-          this.$store.dispatch('setGameOver', true);
-
-          clearInterval(gameLoopInterval);
-          clearInterval(timerInterval);
-
-          this.$router.push('/gameover');
+        if (this.mode === 'freeMode') {
+          this.$store.dispatch('increaseTime');
+        } else {
+          if (
+            !this.$store.state.time.seconds &&
+            !this.$store.state.time.minutes
+          ) {
+            this.endGame('over');
+          }
+          this.$store.dispatch('decreaseTime');
         }
-        this.$store.dispatch('decreaseTime');
       }, 1000);
 
       gameLoopInterval = setInterval(() => {
+        // Wrap it info function
         if (this.$store.state.levelMode.win) {
-          clearInterval(gameLoopInterval);
-          clearInterval(timerInterval);
-
-          this.newGame = true;
-          this.$store.dispatch('setIsGameRunning', false);
-
-
-          console.log('WINNNNNNNNNNNNN!');
-          this.$router.push('/levelwin');
+          this.endGame('win');
         }
 
         if (this.$store.state.gameOver) {
-          this.newGame = true;
-          this.$store.dispatch('setIsGameRunning', false);
-
-          clearInterval(gameLoopInterval);
-          clearInterval(timerInterval);
-
-          this.$router.push('/gameover');
+          this.endGame('over');
         }
 
-        this.$store.dispatch('levelMode/moveDown');
+        this.$store.dispatch(`${this.mode}/moveDown`);
       }, 500);
     },
 
