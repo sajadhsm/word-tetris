@@ -101,16 +101,12 @@ export default {
 
     resetGame() {
       this.newGame = true;
-      // SET_IS_GAME_RUNNING is commited in the resetGlobalState
-      // Remove it later...
-      this.$store.dispatch('setIsGameRunning', false);
 
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
 
-      // NEED FIX: This will reset the time in level mode
       this.$store.dispatch('resetGlobalStates');
-      this.$store.dispatch('levelMode/resetStates');
+      this.$store.dispatch(`${this.mode}/resetStates`);
       // Works as expected but maybe it's better to reset
       // excisting objects content rather than recreat and
       // pushing to the board ?

@@ -106,6 +106,10 @@ const actions = {
   resetStates({ commit }) {
     commit('SET_SCORE', 0);
     commit('SET_MATCH_WORDS', 0);
+    commit('SET_TIME', {
+      seconds: 0,
+      minutes: 0,
+    }, { root: true });
   },
 };
 

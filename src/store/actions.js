@@ -71,8 +71,5 @@ export const resetGlobalStates = ({ commit }) => {
   commit('SET_LAST_ROW', 0);
   commit('SET_LAST_COL', 0);
 
-  commit('SET_TIME', {
-    seconds: 0,
-    minutes: 0,
-  });
+  // Time gets reset by modules
 };

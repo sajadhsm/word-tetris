@@ -21,6 +21,12 @@ const getters = {
   },
 
   levelTime() {
+    if (!state.levels.length) {
+      return {
+        seconds: 30,
+        minutes: 1,
+      };
+    }
     return state.levels[state.currentLevel].time;
   },
 
@@ -132,6 +138,7 @@ const actions = {
   resetStates({ commit }) {
     commit('SET_WIN', false);
     commit('SET_LEVEL_CHARACTERS');
+    commit('SET_TIME', getters.levelTime(), { root: true });
   },
 
   nextLevel({ commit }) {
