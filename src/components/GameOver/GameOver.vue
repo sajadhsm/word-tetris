@@ -1,14 +1,29 @@
 <template>
   <div class="game-over">
-    <h1 class="title">بازی تموم شد!!</h1>
+    <h1 class="title">
+      {{ mode === 'freeMode' ?
+        'بازی تموم شد!' :
+        'موفق نشدی :('
+      }}
+    </h1>
 
     <div class="game-info">
-      <Info title="امتیاز">
+      <Info
+        v-if="mode === 'freeMode'"
+        title="امتیاز">
         {{ $store.state.freeMode.score | toPersianNum }}
       </Info>
 
-      <Info title="تعداد کلمات">
+      <Info
+        v-if="mode === 'freeMode'"
+        title="تعداد کلمات">
         {{ $store.state.freeMode.matchWords | toPersianNum }}
+      </Info>
+
+      <Info
+        v-if="mode === 'levelMode'"
+        title="مرحله">
+        {{ $store.getters['levelMode/currentLevelNatural'] | toPersianNum }}
       </Info>
 
       <Info title="زمان">
@@ -29,6 +44,11 @@ export default {
   components: {
     Info: GameOverInfo,
     Controls: GameOverControls,
+  },
+  computed: {
+    mode() {
+      return this.$store.state.gameMode;
+    },
   },
 };
 </script>

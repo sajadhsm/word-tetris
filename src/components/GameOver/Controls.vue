@@ -24,9 +24,15 @@
 export default {
   name: 'GameOverControls',
 
+  computed: {
+    mode() {
+      return this.$store.state.gameMode;
+    },
+  },
+
   beforeDestroy() {
     this.$store.dispatch('resetGlobalStates');
-    this.$store.dispatch('freeMode/resetStates');
+    this.$store.dispatch(`${this.mode}/resetStates`);
   },
 
   methods: {
@@ -34,7 +40,11 @@ export default {
       this.$router.push({ name: 'main-menu' });
     },
     replayGame() {
-      this.$router.push({ name: 'free-mode' });
+      const name = {
+        freeMode: 'free-mode',
+        levelMode: 'level-mode',
+      };
+      this.$router.push({ name: name[this.mode] });
     },
   },
 };
