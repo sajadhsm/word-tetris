@@ -73,7 +73,26 @@ body {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
 }
 
+/* Ultra small mobiles */
+@media screen and (max-width: 319px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Standard mobile devices are the base size
+   320px to 768px
+*/
+
+/* Tablets and HD screens */
 @media screen and (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Full HD and bigger screens */
+@media screen and (min-width: 1366px) {
   html {
     font-size: 24px;
   }
