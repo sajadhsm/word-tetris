@@ -46,7 +46,10 @@ export default {
     endGame(status) {
       this.newGame = true;
       this.$store.dispatch('setIsGameRunning', false);
-      this.$store.dispatch('setGameOver', true);
+
+      if (status === 'over') {
+        this.$store.dispatch('setGameOver', true);
+      }
 
       clearInterval(gameLoopInterval);
       clearInterval(timerInterval);
