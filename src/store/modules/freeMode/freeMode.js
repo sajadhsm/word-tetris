@@ -80,7 +80,11 @@ const actions = {
     ) {
       checkForMatchWord(commit, rootState, state);
 
-      // Change game over condition
+      // Set the next block spawn location before
+      // game over check, because the game should over
+      // if next block is unable to placed into spawn location
+      dispatch('setSpawnLoacation', null, { root: true });
+
       if (
         rootState.currentRow === 0 &&
         hit.bottomIsBlock(rootState)
@@ -90,7 +94,6 @@ const actions = {
         return;
       }
 
-      dispatch('setSpawnLoacation', null, { root: true });
       commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
       commit('SET_NEXT_CHAR', getters.randomChar(), { root: true });
       commit('SET_CURRENT_BLOCK', null, { root: true });

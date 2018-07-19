@@ -10,8 +10,8 @@ const state = {
 
 const getters = {
   randomChar() {
-    // if the arr length is 0 SET_LEVEL_CHARACTERS will be called
-    // in the movement actions
+    // If the levelCharacters length is 0 SET_LEVEL_CHARACTERS will be
+    // called in the movement actions to refill it!
     const r = Math.floor(Math.random() * state.levelCharacters.length);
     return state.levelCharacters.splice(r, 1)[0];
   },
@@ -46,8 +46,8 @@ const mutations = {
     state.currentLevel = level;
   },
 
+  /** Fill the levelCharacters with current level word characters */
   SET_LEVEL_CHARACTERS(state) {
-    // Return an array of current level word characters
     state.levelCharacters = state.levels[state.currentLevel]
       .word.split('').map(char => char);
   },
@@ -98,7 +98,11 @@ const actions = {
         return;
       }
 
-      // Change game over condition
+      // Set the next block spawn location before
+      // game over check, because the game should over
+      // if next block is unable to placed into spawn location
+      dispatch('setSpawnLoacation', null, { root: true });
+
       if (
         rootState.currentRow === 0 &&
         hit.bottomIsBlock(rootState)
@@ -108,12 +112,13 @@ const actions = {
         return;
       }
 
-      dispatch('setSpawnLoacation', null, { root: true });
       commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
       commit('SET_NEXT_CHAR', getters.randomChar(), { root: true });
       commit('SET_CURRENT_BLOCK', null, { root: true });
 
-      // Getter arr 0 length handle
+      // Each block placement cause one character pop from
+      // levelCharacters array! So we need to refill it
+      // when it gets empty!
       if (!state.levelCharacters.length) commit('SET_LEVEL_CHARACTERS');
 
       return;
