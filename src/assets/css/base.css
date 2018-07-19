@@ -1,21 +1,3 @@
-@font-face {
-  font-family: Shabnam;
-  src: url('./fonts/Shabnam.eot');
-  src: url('./fonts/Shabnam.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/Shabnam.woff') format('woff'),
-       url('./fonts/Shabnam.ttf') format('truetype');
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: Shabnam;
-  src: url('./fonts/Shabnam-Bold.eot');
-  src: url('./fonts/Shabnam-Bold.eot?#iefix') format('embedded-opentype'),
-       url('./fonts/Shabnam-Bold.woff') format('woff'),
-       url('./fonts/Shabnam-Bold.ttf') format('truetype');
-  font-weight: bold;
-}
-
 html {
   height: 100%;
 }
@@ -60,29 +42,4 @@ body {
   width: 100%;
   height: 100%;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
-}
-
-/* Ultra small mobiles */
-@media screen and (max-width: 319px) {
-  html {
-    font-size: 12px;
-  }
-}
-
-/* Standard mobile devices are the base size
-   320px to 768px
-*/
-
-/* Tablets and HD screens */
-@media screen and (min-width: 768px) {
-  html {
-    font-size: 18px;
-  }
-}
-
-/* Full HD and bigger screens */
-@media screen and (min-width: 1366px) {
-  html {
-    font-size: 24px;
-  }
 }

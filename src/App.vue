@@ -10,5 +10,7 @@
 
 <style>
 /* Global styles */
+@import './assets/css/fonts.css';
 @import './assets/css/base.css';
+@import './assets/css/media-queries.css';
 </style>
