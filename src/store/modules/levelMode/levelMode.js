@@ -48,6 +48,8 @@ const mutations = {
 
   /** Fill the levelCharacters with current level word characters */
   SET_LEVEL_CHARACTERS(state) {
+    if (!state.levels.length) return;
+
     state.levelCharacters = state.levels[state.currentLevel]
       .word.split('').map(char => char);
   },

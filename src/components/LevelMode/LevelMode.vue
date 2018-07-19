@@ -28,6 +28,10 @@ export default {
   },
 
   created() {
+    // Reset states in case of redirection!
+    this.$store.dispatch('resetGlobalStates');
+    this.$store.dispatch('levelMode/resetStates');
+
     // Load current level from local storage
     if (localStorage.getItem('currentLevel')) {
       try {

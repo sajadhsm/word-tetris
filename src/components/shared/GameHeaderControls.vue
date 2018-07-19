@@ -38,6 +38,10 @@ export default {
       return this.$store.state.gameMode;
     },
   },
+  beforeDestroy() {
+    clearInterval(gameLoopInterval);
+    clearInterval(timerInterval);
+  },
   methods: {
     endGame(status) {
       this.newGame = true;

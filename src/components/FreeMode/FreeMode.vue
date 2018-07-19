@@ -22,6 +22,10 @@ export default {
   },
 
   created() {
+    // Reset states in case of redirection!
+    this.$store.dispatch('resetGlobalStates');
+    this.$store.dispatch('freeMode/resetStates');
+
     console.log('CREATED!');
     // Maybe set words and characters once in app component
     // Or no maybe we need to set words seprately for each game mode
