@@ -64,52 +64,22 @@ const actions = {
     commit('SET_CURRENT_BLOCK', null, { root: true });
   },
 
-  moveLeft({ commit, dispatch, rootState }) {
+  moveLeft({ dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
       hit.leftIsWall(rootState) ||
       hit.leftIsBlock(rootState)
     ) return;
 
-    if (
-      hit.leftIsBlock(rootState) &&
-      hit.bottomIsBlock(rootState)
-    ) {
-      dispatch('setSpawnLocation', null, { root: true });
-      commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
-      commit('SET_NEXT_CHAR', getters.randomChar(), { root: true });
-      commit('SET_CURRENT_BLOCK', null, { root: true });
-
-      // Getter arr 0 length handle
-      if (!state.levelCharacters.length) commit('SET_LEVEL_CHARACTERS');
-
-      return;
-    }
-
     dispatch('moveBlock', 'Left', { root: true });
   },
 
-  moveRight({ commit, dispatch, rootState }) {
+  moveRight({ dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
       hit.rightIsWall(rootState) ||
       hit.rightIsBlock(rootState)
     ) return;
-
-    if (
-      hit.rightIsBlock(rootState) &&
-      hit.bottomIsBlock(rootState)
-    ) {
-      dispatch('setSpawnLocation', null, { root: true });
-      commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
-      commit('SET_NEXT_CHAR', getters.randomChar(), { root: true });
-      commit('SET_CURRENT_BLOCK', null, { root: true });
-
-      // Getter arr 0 length handle
-      if (!state.levelCharacters.length) commit('SET_LEVEL_CHARACTERS');
-
-      return;
-    }
 
     dispatch('moveBlock', 'Right', { root: true });
   },
