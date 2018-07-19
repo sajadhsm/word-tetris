@@ -44,6 +44,13 @@ export const blockToBottom = ({ commit, state }) => {
   commit('SET_CURRENT_ROW', state.currentRow + 1);
 };
 
+/** Move the block to given direction and clear behind block */
+export const moveBlock = ({ commit, dispatch }, direction) => {
+  dispatch(`blockTo${direction}`);
+  commit('CLEAR_LAST_BLOCK');
+  commit('SET_CURRENT_BLOCK');
+};
+
 export const setSpawnLoacation = ({ commit, state }) => {
   commit('SET_LAST_COL', 0);
   commit('SET_LAST_ROW', 0);

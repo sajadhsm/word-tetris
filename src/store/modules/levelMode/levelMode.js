@@ -87,9 +87,7 @@ const actions = {
       return;
     }
 
-    dispatch('blockToLeft', null, { root: true });
-    commit('CLEAR_LAST_BLOCK', null, { root: true });
-    commit('SET_CURRENT_BLOCK', null, { root: true });
+    dispatch('moveBlock', 'Left', { root: true });
   },
 
   moveRight({ commit, dispatch, rootState }) {
@@ -114,9 +112,7 @@ const actions = {
       return;
     }
 
-    dispatch('blockToRight', null, { root: true });
-    commit('CLEAR_LAST_BLOCK', null, { root: true });
-    commit('SET_CURRENT_BLOCK', null, { root: true });
+    dispatch('moveBlock', 'Right', { root: true });
   },
 
   moveDown({ commit, dispatch, rootState }) {
@@ -154,9 +150,7 @@ const actions = {
       return;
     }
 
-    dispatch('blockToBottom', null, { root: true });
-    commit('CLEAR_LAST_BLOCK', null, { root: true });
-    commit('SET_CURRENT_BLOCK', null, { root: true });
+    dispatch('moveBlock', 'Bottom', { root: true });
   },
 
   resetStates({ commit }) {

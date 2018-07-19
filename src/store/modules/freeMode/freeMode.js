@@ -50,28 +50,24 @@ const actions = {
     commit('SET_CURRENT_BLOCK', null, { root: true });
   },
 
-  moveLeft({ commit, dispatch, rootState }) {
+  moveLeft({ dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
       logic.leftIsWall(rootState) ||
       logic.leftIsBlock(rootState)
     ) return;
 
-    dispatch('blockToLeft', null, { root: true });
-    commit('CLEAR_LAST_BLOCK', null, { root: true });
-    commit('SET_CURRENT_BLOCK', null, { root: true });
+    dispatch('moveBlock', 'Left', { root: true });
   },
 
-  moveRight({ commit, dispatch, rootState }) {
+  moveRight({ dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
       logic.rightIsWall(rootState) ||
       logic.rightIsBlock(rootState)
     ) return;
 
-    dispatch('blockToRight', null, { root: true });
-    commit('CLEAR_LAST_BLOCK', null, { root: true });
-    commit('SET_CURRENT_BLOCK', null, { root: true });
+    dispatch('moveBlock', 'Right', { root: true });
   },
 
   moveDown({ commit, dispatch, rootState }) {
@@ -100,9 +96,7 @@ const actions = {
       return;
     }
 
-    dispatch('blockToBottom', null, { root: true });
-    commit('CLEAR_LAST_BLOCK', null, { root: true });
-    commit('SET_CURRENT_BLOCK', null, { root: true });
+    dispatch('moveBlock', 'Bottom', { root: true });
   },
 
   resetStates({ commit }) {
