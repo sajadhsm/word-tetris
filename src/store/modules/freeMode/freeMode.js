@@ -1,4 +1,5 @@
-import * as logic from './logic';
+import * as hit from '../hitConditions';
+import checkForMatchWord from './wordMatchCheck';
 
 const state = {
   words: [],
@@ -53,8 +54,8 @@ const actions = {
   moveLeft({ dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
-      logic.leftIsWall(rootState) ||
-      logic.leftIsBlock(rootState)
+      hit.leftIsWall(rootState) ||
+      hit.leftIsBlock(rootState)
     ) return;
 
     dispatch('moveBlock', 'Left', { root: true });
@@ -63,8 +64,8 @@ const actions = {
   moveRight({ dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
-      logic.rightIsWall(rootState) ||
-      logic.rightIsBlock(rootState)
+      hit.rightIsWall(rootState) ||
+      hit.rightIsBlock(rootState)
     ) return;
 
     dispatch('moveBlock', 'Right', { root: true });
@@ -74,15 +75,15 @@ const actions = {
     if (!rootState.isGameRunning) return;
 
     if (
-      logic.noMoreRow(rootState) ||
-      logic.bottomIsBlock(rootState)
+      hit.noMoreRow(rootState) ||
+      hit.bottomIsBlock(rootState)
     ) {
-      logic.checkForMatchWord(commit, rootState, state);
+      checkForMatchWord(commit, rootState, state);
 
       // Change game over condition
       if (
         rootState.currentRow === 0 &&
-        logic.bottomIsBlock(rootState)
+        hit.bottomIsBlock(rootState)
       ) {
         commit('SET_GAME_OVER', true, { root: true });
         console.log('GAME OVER :(');

@@ -1,6 +1,5 @@
-import * as logic from './logic';
-
-// NOTE: Wrap dublicated movement codes into functions
+import * as hit from '../hitConditions';
+import checkForMatchWord from './wordMatchCheck';
 
 const state = {
   levels: [],
@@ -68,13 +67,13 @@ const actions = {
   moveLeft({ commit, dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
-      logic.leftIsWall(rootState) ||
-      logic.leftIsBlock(rootState)
+      hit.leftIsWall(rootState) ||
+      hit.leftIsBlock(rootState)
     ) return;
 
     if (
-      logic.leftIsBlock(rootState) &&
-      logic.bottomIsBlock(rootState)
+      hit.leftIsBlock(rootState) &&
+      hit.bottomIsBlock(rootState)
     ) {
       dispatch('setSpawnLocation', null, { root: true });
       commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
@@ -93,13 +92,13 @@ const actions = {
   moveRight({ commit, dispatch, rootState }) {
     if (
       !rootState.isGameRunning ||
-      logic.rightIsWall(rootState) ||
-      logic.rightIsBlock(rootState)
+      hit.rightIsWall(rootState) ||
+      hit.rightIsBlock(rootState)
     ) return;
 
     if (
-      logic.rightIsBlock(rootState) &&
-      logic.bottomIsBlock(rootState)
+      hit.rightIsBlock(rootState) &&
+      hit.bottomIsBlock(rootState)
     ) {
       dispatch('setSpawnLocation', null, { root: true });
       commit('SET_CURRENT_CHAR', rootState.nextChar, { root: true });
@@ -119,10 +118,10 @@ const actions = {
     if (!rootState.isGameRunning) return;
 
     if (
-      logic.noMoreRow(rootState) ||
-      logic.bottomIsBlock(rootState)
+      hit.noMoreRow(rootState) ||
+      hit.bottomIsBlock(rootState)
     ) {
-      if (logic.checkForMatchWord(rootState, state)) {
+      if (checkForMatchWord(rootState, state)) {
         commit('SET_WIN', true);
         // STORE STATES?
         // Or do them in the win page
@@ -132,7 +131,7 @@ const actions = {
       // Change game over condition
       if (
         rootState.currentRow === 0 &&
-        logic.bottomIsBlock(rootState)
+        hit.bottomIsBlock(rootState)
       ) {
         commit('SET_GAME_OVER', true, { root: true });
         console.log('GAME OVER :(');
