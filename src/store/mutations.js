@@ -96,6 +96,7 @@ export const CLEAR_WORD_BLOCKS = (state, blocks) => {
     // top block
     while (state.board[upperBlock][block.col].content !== '') {
       const blk = state.board[upperBlock][block.col];
+
       Vue.set(state.board[upperBlock + 1], block.col, {
         content: blk.content,
         background: charsBG[blk.content] || blockFallBackBGColor,
@@ -103,12 +104,19 @@ export const CLEAR_WORD_BLOCKS = (state, blocks) => {
 
       upperBlock -= 1;
 
-      // Only clear the top most block
-      if (state.board[upperBlock][block.col].content === '') {
+      if (
+        // If column is full
+        upperBlock < 0 ||
+        // If upper block is empty!
+        state.board[upperBlock][block.col].content === ''
+      ) {
         Vue.set(state.board[upperBlock + 1], block.col, {
           content: '',
           background: '',
         });
+
+        // Exit no need to recheck while condition
+        return;
       }
     }
   });
