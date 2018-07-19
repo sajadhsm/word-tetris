@@ -33,6 +33,10 @@ body {
   border-radius: 43%;
   cursor: pointer;
   outline: none;
+  transition: background 0.23s;
+}
+.button:hover {
+  background: #eee;
 }
 
 /* Character block wrapper div class */
