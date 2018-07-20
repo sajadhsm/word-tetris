@@ -30,6 +30,16 @@ export default {
         localStorage.removeItem('darkTheme');
       }
     }
+
+    // Load score board from localStorage
+    if (localStorage.getItem('scoreBoard')) {
+      try {
+        const board = JSON.parse(localStorage.getItem('scoreBoard'));
+        this.$store.commit('SET_SCORE_BOARD', board);
+      } catch (e) {
+        localStorage.removeItem('scoreBoard');
+      }
+    }
   },
 };
 </script>

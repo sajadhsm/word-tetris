@@ -61,6 +61,8 @@ export default {
       };
 
       this.$store.dispatch('updateScoreBoard', summery);
+      const strScoreBoard = JSON.stringify(this.$store.state.scoreBoard);
+      localStorage.setItem('scoreBoard', strScoreBoard);
     }
   },
 };
