@@ -1,135 +1,158 @@
 /* eslint-disable no-param-reassign */
-
-export default function checkForMatchWord(commit, rootState, localState) {
-  let cr = rootState.currentRow;
-  let cc = rootState.currentCol - 1;
-  let found = false;
-  let word = '';
-
-  // Left side of current block
-  while (!found && cc >= 0 && rootState.board[cr][cc].content !== '') {
-    word = rootState.currentChar;
-
-    for (let i = rootState.currentCol - 1; i === cc; i -= 1) {
-      console.log(rootState.board[cr][i].content);
-      word += rootState.board[cr][i].content;
-    }
-
-    if (localState.words.includes(word)) {
-      const blocks = [];
-      for (let i = cc; i <= rootState.currentCol; i += 1) {
-        blocks.push({
-          row: cr,
-          col: i,
-        });
-      }
-      commit('CLEAR_WORD_BLOCKS', blocks, { root: true });
-      found = true;
-      localState.score += 10;
-      localState.matchWords += 1;
-      return;
-    }
-    cc -= 1;
-  }
-
-  // Right side of current block
-  cc = rootState.currentCol + 1;
-  while (!found && cc < rootState.cols && rootState.board[cr][cc].content !== '') {
-    word = rootState.currentChar;
-
-    for (let i = rootState.currentCol + 1; i === cc; i += 1) {
-      word += rootState.board[cr][i].content;
-      console.log(rootState.board[cr][i].content, word);
-    }
-
-    word = word.split('').reverse().join('');
-
-    if (localState.words.includes(word)) {
-      const blocks = [];
-      for (let i = rootState.currentCol; i <= cc; i += 1) {
-        blocks.push({
-          row: cr,
-          col: i,
-        });
-      }
-      commit('CLEAR_WORD_BLOCKS', blocks, { root: true });
-      found = true;
-      localState.score += 10;
-      localState.matchWords += 1;
-      return;
-    }
-    cc += 1;
-  }
-
-  // Current block bottom
-  cc = rootState.currentCol;
-  cr = rootState.currentRow + 1;
-  while (!found && cr < rootState.rows && rootState.board[cr][cc].content !== '') {
-    word = rootState.currentChar;
-
-    for (let i = rootState.currentRow + 1; i === cr; i += 1) {
-      console.log(rootState.board[i][cc].content);
-      word += rootState.board[i][cc].content;
-    }
-
-    if (localState.words.includes(word)) {
-      const blocks = [];
-      for (let i = rootState.currentRow; i <= cr; i += 1) {
-        blocks.push({
-          row: i,
-          col: cc,
-        });
-      }
-      commit('CLEAR_WORD_BLOCKS', blocks, { root: true });
-      found = true;
-      localState.score += 10;
-      localState.matchWords += 1;
-      return;
-    }
-    cr += 1;
-  }
-
-  // Check possible currect word when a character placed between two other blocks
-  let wordRightIndex = rootState.currentCol;
-  let wordLeftIndex = rootState.currentCol;
+/**
+   * this function find all possible words in input array
+   *  and return a word that have maximum length in other words (for row)
+   * @param {string} array input letters array
+   * @param {number} cCol current column index
+   * @param {number} cRow current row index
+   * @param {object} localState local state
+   *
+   * @returns {object} maximum word length and its blocks
+   */
+function maxWordFinderInRow(array, cCol, cRow, localState) {
+  let wordRightIndex = cCol;
+  let wordLeftIndex = cCol;
 
   // Find the right most index of the possible word
-  while (
-    wordRightIndex < rootState.cols - 1 &&
-    rootState.board[rootState.currentRow][wordRightIndex].content !== ''
-  ) {
-    wordRightIndex += 1;
-  }
+  while (wordRightIndex < array.length && array[wordRightIndex].content !== '') { wordRightIndex += 1; }
+
   // Find the left most index of the possible word
-  while (
-    wordLeftIndex > 0 &&
-    rootState.board[rootState.currentRow][wordLeftIndex].content !== ''
-  ) {
-    wordLeftIndex -= 1;
-  }
+  while (wordLeftIndex > -1 && array[wordLeftIndex].content !== '') { wordLeftIndex -= 1; }
 
   // Create words from right to left and check if any of them
   // is in the word lists
-  for (let i = wordRightIndex; i > wordLeftIndex; i -= 1) {
-    word = rootState.board[rootState.currentRow][i].content;
+  let maxBlocks = [];
+  let maxWordLength = 0;
+  for (let i = wordRightIndex - 1; i > wordLeftIndex; i -= 1) {
+    let word = array[i].content;
     const blocks = [{
-      row: rootState.currentRow,
+      row: cRow,
       col: i,
     }];
-
     for (let j = i - 1; j > wordLeftIndex; j -= 1) {
-      word += rootState.board[rootState.currentRow][j].content;
+      word += array[j].content;
       blocks.push({
-        row: rootState.currentRow,
+        row: cRow,
         col: j,
       });
-
-      if (localState.words.includes(word)) {
-        commit('CLEAR_WORD_BLOCKS', blocks, { root: true });
-        localState.score += 10;
-        localState.matchWords += 1;
-        return;
+      if (localState.words.includes(word)) { // if word found
+        if (word.length > maxWordLength) { // if found word is greater than previous maximum word
+          maxWordLength = word.length;
+          maxBlocks = blocks;
+        }
       }
     }
+  }
+  return {
+    blocks: maxBlocks,
+    score: maxWordLength,
+  };
+}
+
+/**
+   * this function find all possible words in input array
+   * and return a word that have maximum length in other words (for column)
+   * @param {string} array input letters array
+   * @param {number} cCol current column index
+   * @param {number} cRow current row index
+   * @param {object} localState local state
+   *
+   * @returns {object} maximum word length and its blocks
+   */
+function maxWordFinderInCol(array, cCol, cRow, localState) {
+  let wordRightIndex = cRow;
+  let wordLeftIndex = cRow;
+
+  // Find the right most index of the possible word
+  while (wordRightIndex < array.length && array[wordRightIndex].content !== '') { wordRightIndex += 1; }
+
+  // Find the left most index of the possible word
+  while (wordLeftIndex > -1 && array[wordLeftIndex].content !== '') { wordLeftIndex -= 1; }
+
+  // Create words from right to left and check if any of them
+  // is in the word lists
+  // bottom-up words in column
+  let maxBlocks = [];
+  let maxWordLength = 0;
+  for (let i = wordRightIndex - 1; i > wordLeftIndex; i -= 1) {
+    let word = array[i].content;
+    const blocks = [{
+      row: i,
+      col: cCol,
+    }];
+    for (let j = i - 1; j > wordLeftIndex; j -= 1) {
+      word += array[j].content;
+      blocks.push({
+        row: j,
+        col: cCol,
+      });
+      if (localState.words.includes(word)) { // if word found
+        if (word.length > maxWordLength) { // if found word is greater than previous maximum word
+          maxWordLength = word.length;
+          maxBlocks = blocks;
+        }
+      }
+    }
+  }
+  // top-down words in column
+  for (let i = wordLeftIndex + 1; i < wordRightIndex; i += 1) {
+    let word = array[i].content;
+    const blocks = [{
+      row: i,
+      col: cCol,
+    }];
+    for (let j = i + 1; j < wordRightIndex; j += 1) {
+      word += array[j].content;
+      blocks.push({
+        row: j,
+        col: cCol,
+      });
+      if (localState.words.includes(word)) { // if word found
+        if (word.length > maxWordLength) { // if found word is greater than previous maximum word
+          maxWordLength = word.length;
+          maxBlocks = blocks;
+        }
+      }
+    }
+  }
+  return {
+    blocks: maxBlocks,
+    score: maxWordLength,
+  };
+}
+/**
+   * this function check board to find match word/s
+   * @param {object} commit commit module
+   * @param {object} rootState root tate
+   * @param {object} localState local state
+   *
+   * @returns {null}
+   */
+export default function checkForMatchWord(commit, rootState, localState) {
+  let blocks = [];
+  const rowArray = rootState.board[rootState.currentRow];
+  // ^ rowArray creation
+  const row = maxWordFinderInRow(rowArray, rootState.currentCol, rootState.currentRow, localState);
+
+  const colArray = [];
+  // #region colArray creation
+  for (let i = 0; i < rootState.rows; i += 1) {
+    const block = rootState.board[i][rootState.currentCol];
+    if (block.content === '') { block.content = ''; }
+    colArray.push(block);
+  }
+  // #endregion
+  const col = maxWordFinderInCol(colArray, rootState.currentCol, rootState.currentRow, localState);
+
+  // blocks of column and row that should be removed
+  blocks = blocks.concat(blocks, col.blocks, row.blocks);
+
+  // if have blocks, clear them in board and calculate score
+  if (blocks.length !== 0) {
+    commit('CLEAR_WORD_BLOCKS', blocks, { root: true });
+    localState.score += (row.score + col.score);
+    if (row.score === 0) {
+      localState.matchWords += 1;
+    } else if (col.score === 0) { localState.matchWords += 1; } else { localState.matchWords += 2; }
   }
 }
