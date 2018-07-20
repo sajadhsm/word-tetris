@@ -9,8 +9,8 @@
         <div class="option">
           <p class="title">اطلاعات حالت مرحله‌ای</p>
           <button
+            :disabled="isLevelClear"
             class="button"
-            :disabled="isCurrentLevel"
             @click="clearCurrentLevel">
             <font-awesome-icon
               icon="trash-alt"
@@ -21,9 +21,9 @@
         <div class="option">
           <p class="title">اطلاعات جدول امتیازات</p>
           <button
+            :disabled="isScoreBoardClear"
             class="button"
-            :disabled="isCurrentLevel"
-            @click="clearCurrentLevel">
+            @click="clearScoreBoard">
             <font-awesome-icon
               icon="trash-alt"
               size="lg" />
@@ -65,15 +65,43 @@
 export default {
   name: 'Options',
 
+  data() {
+    return {
+      levelClear: false,
+      scoreBoardClear: false,
+    };
+  },
+
   computed: {
-    isCurrentLevel() {
-      return localStorage.getItem('currentLevel') === null;
+    isLevelClear() {
+      return this.levelClear;
     },
+
+    isScoreBoardClear() {
+      return this.scoreBoardClear;
+    },
+  },
+
+  created() {
+    // Set initial clear buttons disable status
+    this.levelClear = localStorage
+      .getItem('currentLevel') === null;
+
+    this.scoreBoardClear = localStorage
+      .getItem('scoreBoard') === null;
   },
 
   methods: {
     clearCurrentLevel() {
       localStorage.removeItem('currentLevel');
+      this.$store.commit('levelMode/SET_CURRENT_LEVEL', 0);
+      this.levelClear = true;
+    },
+
+    clearScoreBoard() {
+      localStorage.removeItem('scoreBoard');
+      this.$store.commit('SET_SCORE_BOARD', []);
+      this.scoreBoardClear = true;
     },
 
     setLightTheme() {
@@ -120,5 +148,13 @@ export default {
 
 .dark-btn {
   margin-left: 0.5rem;
+}
+
+.button {
+  transition: opacity 0.23s;
+}
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
