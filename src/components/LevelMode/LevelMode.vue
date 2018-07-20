@@ -42,7 +42,11 @@ export default {
       }
     }
 
-    this.$store.commit('levelMode/SET_LEVELS', levels);
+    // Set levels only once in app life cycle
+    if (!this.$store.state.levelMode.levels.length) {
+      this.$store.commit('levelMode/SET_LEVELS', levels);
+    }
+
     this.$store.commit('levelMode/SET_LEVEL_CHARACTERS');
 
     // Change the board size to fit the word length
