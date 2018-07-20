@@ -80,6 +80,10 @@ export const CLEAR_LAST_BLOCK = (state) => {
 };
 
 export const CLEAR_WORD_BLOCKS = (state, blocks) => {
+  // Sort the blocks array by rowIndex increasingly
+  // It's necessary for clearing column words
+  blocks.sort((a, b) => a.row - b.row);
+
   // First clear the given blocks
   blocks.forEach((block) => {
     Vue.set(state.board[block.row], block.col, {
