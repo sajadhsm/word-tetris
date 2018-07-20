@@ -50,6 +50,19 @@ export default {
       return this.$store.state.gameMode;
     },
   },
+
+  created() {
+    // Update scoreboard for freeMode
+    if (this.mode === 'freeMode') {
+      const summery = {
+        score: this.$store.state.freeMode.score,
+        time: this.$store.getters.time,
+        words: this.$store.state.freeMode.matchWords,
+      };
+
+      this.$store.dispatch('updateScoreBoard', summery);
+    }
+  },
 };
 </script>
 

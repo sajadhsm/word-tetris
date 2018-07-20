@@ -73,3 +73,8 @@ export const resetGlobalStates = ({ commit }) => {
 
   // Time gets reset by modules
 };
+
+export const updateScoreBoard = ({ commit }, item) => {
+  commit('ADD_TO_SCORE_BOARD', item);
+  commit('SORT_AND_FIX_SCORE_BOARD');
+};

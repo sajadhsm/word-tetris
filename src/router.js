@@ -7,6 +7,7 @@ import MainMenu from '@/components/MainMenu/MainMenu.vue';
 import GameOver from '@/components/GameOver/GameOver.vue';
 import LevelWin from '@/components/LevelWin/LevelWin.vue';
 import Settings from '@/components/SettingsPage/Settings.vue';
+import ScoreBoard from '@/components/ScoreBoard/ScoreBoard.vue';
 
 import store from './store/store';
 
@@ -59,6 +60,11 @@ export default new Router({
       path: '/settings',
       name: 'settings',
       component: Settings,
+    },
+    {
+      path: '/scoreboard',
+      name: 'score-board',
+      component: ScoreBoard,
     },
     {
       path: '*', // 404 Handle (Back to main menu)

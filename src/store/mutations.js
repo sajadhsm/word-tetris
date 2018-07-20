@@ -154,3 +154,20 @@ export const SET_DARK_THEME = (state, status) => {
   if (typeof (status) !== 'boolean') return;
   state.darkTheme = status;
 };
+
+export const SET_SCORE_BOARD = (state, scores) => {
+  if (!Array.isArray(scores)) return;
+  state.scoreBoard = scores;
+};
+
+export const ADD_TO_SCORE_BOARD = (state, item) => {
+  // Scoreboard items don't need to be reactive
+  // so we simply push the new item
+  state.scoreBoard.push(item);
+};
+
+export const SORT_AND_FIX_SCORE_BOARD = (state) => {
+  state.scoreBoard = state.scoreBoard
+    .sort((a, b) => a.score < b.score)
+    .slice(0, 10);
+};

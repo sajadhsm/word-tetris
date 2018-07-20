@@ -10,7 +10,10 @@
 
       <GameModeSelector />
 
-      <button class="menu-button">جدول امتیازات</button>
+      <router-link
+        :to="{ name: 'score-board' }"
+        tag="button"
+        class="menu-button">جدول امتیازات</router-link>
 
       <router-link
         :to="{ name: 'settings' }"
