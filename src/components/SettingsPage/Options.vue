@@ -35,13 +35,11 @@ export default {
     },
 
     setLightTheme() {
-      const app = document.querySelector('#app');
-      app.className = '';
+      this.$store.commit('SET_DARK_THEME', false);
     },
 
     setDarkTheme() {
-      const app = document.querySelector('#app');
-      app.className = 'dark';
+      this.$store.commit('SET_DARK_THEME', true);
     },
   },
 };

@@ -149,3 +149,8 @@ export const DECREASE_TIME = (state) => {
 
   state.time.seconds -= 1;
 };
+
+export const SET_DARK_THEME = (state, status) => {
+  if (typeof (status) !== 'boolean') return;
+  state.darkTheme = status;
+};

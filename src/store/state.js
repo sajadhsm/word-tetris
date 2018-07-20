@@ -15,4 +15,5 @@ export default {
   },
   gameOver: false,
   isGameRunning: false,
+  darkTheme: false,
 };
