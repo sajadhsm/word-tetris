@@ -168,6 +168,17 @@ export const ADD_TO_SCORE_BOARD = (state, item) => {
 
 export const SORT_AND_FIX_SCORE_BOARD = (state) => {
   state.scoreBoard = state.scoreBoard
-    .sort((a, b) => a.score < b.score)
+    .sort((a, b) => {
+      if (a.score > b.score) return -1;
+      else if (a.score < b.score) return 1;
+
+      if (a.time > b.time) return 1;
+      else if (a.time < b.time) return -1;
+
+      if (a.words > b.words) return 1;
+      else if (a.words < b.words) return -1;
+
+      return 0;
+    })
     .slice(0, 10);
 };
