@@ -15,6 +15,9 @@ import {
   faAngleDoubleRight,
   faTrophy,
   faStopwatch,
+  faTrashAlt,
+  faSun,
+  faMoon,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -31,6 +34,9 @@ library.add(
   faAngleDoubleRight,
   faTrophy,
   faStopwatch,
+  faTrashAlt,
+  faSun,
+  faMoon,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

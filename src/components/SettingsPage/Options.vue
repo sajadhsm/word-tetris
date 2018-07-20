@@ -1,21 +1,63 @@
 <template>
-  <div class="options">
-    <div class="option">
-      <p class="title">پاک کردن اطلاعات حالت مرحله‌ای</p>
-      <button
-        :disabled="isCurrentLevel"
-        @click="clearCurrentLevel">
-        پاک کن
-      </button>
+  <div class="fill">
+
+    <div class="options">
+
+      <div class="clear-options">
+        <h3>حذف اطلاعات ذخیره‌شده</h3>
+
+        <div class="option">
+          <p class="title">اطلاعات حالت مرحله‌ای</p>
+          <button
+            class="button"
+            :disabled="isCurrentLevel"
+            @click="clearCurrentLevel">
+            <font-awesome-icon
+              icon="trash-alt"
+              size="lg" />
+          </button>
+        </div>
+
+        <div class="option">
+          <p class="title">اطلاعات جدول امتیازات</p>
+          <button
+            class="button"
+            :disabled="isCurrentLevel"
+            @click="clearCurrentLevel">
+            <font-awesome-icon
+              icon="trash-alt"
+              size="lg" />
+          </button>
+        </div>
+      </div>
+
+      <div class="theme-options">
+        <h3>تغییرات ظاهری</h3>
+
+        <div class="option">
+          <p class="title">انتخاب تم بازی</p>
+          <div class="buttons">
+            <button
+              class="button dark-btn"
+              @click="setDarkTheme">
+              <font-awesome-icon
+                icon="moon"
+                size="lg" />
+            </button>
+
+            <button
+              class="button"
+              @click="setLightTheme">
+              <font-awesome-icon
+                icon="sun"
+                size="lg" />
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="option">
-      <p class="title">انتخاب تم بازی</p>
-      <div class="buttons">
-        <button @click="setDarkTheme">تیره</button>
-        <button @click="setLightTheme">روشن</button>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -54,12 +96,29 @@ export default {
 </script>
 
 <style scoped>
-.options {
+.fill {
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  /* fill the space under Header */
   flex: 1;
-  /* background: goldenrod; */
+}
+.options {
+  max-width: 768px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.clear-options {
+  margin-bottom: 2rem;
+}
+.clear-options .option {
+  margin-bottom: 1rem;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dark-btn {
+  margin-left: 0.5rem;
 }
 </style>
