@@ -34,6 +34,11 @@ const getters = {
     return state.levels[state.currentLevel].word;
   },
 
+  levelSpeed() {
+    return state.levels[state.currentLevel]
+      .speed || 1000;
+  },
+
   currentLevelNatural() {
     return state.currentLevel + 1;
   },

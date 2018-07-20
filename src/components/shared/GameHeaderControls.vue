@@ -31,13 +31,23 @@ export default {
   data() {
     return {
       newGame: true,
+      gameSpeed: 750,
     };
   },
+
   computed: {
     mode() {
       return this.$store.state.gameMode;
     },
   },
+
+  created() {
+    // Sets gameSpeed according to gameMode
+    this.gameSpeed = this.mode === 'levelMode' ?
+      this.$store.getters['levelMode/levelSpeed']
+      : 750;
+  },
+
   beforeDestroy() {
     clearInterval(gameLoopInterval);
     clearInterval(timerInterval);
@@ -59,6 +69,7 @@ export default {
 
       this.$router.push({ name });
     },
+
     startGame() {
       if (this.newGame) {
         this.newGame = false;
@@ -71,6 +82,8 @@ export default {
         if (this.mode === 'freeMode') {
           this.$store.dispatch('increaseTime');
         } else {
+          // Game over via running out of time only occurs
+          // in the level mode
           if (
             !this.$store.state.time.seconds &&
             !this.$store.state.time.minutes
@@ -82,7 +95,6 @@ export default {
       }, 1000);
 
       gameLoopInterval = setInterval(() => {
-        // Wrap it info function
         if (this.$store.state.levelMode.win) {
           this.endGame('win');
         }
@@ -92,7 +104,9 @@ export default {
         }
 
         this.$store.dispatch(`${this.mode}/moveDown`);
-      }, 500);
+
+      // Block auto move speed is sat using interval delay
+      }, this.gameSpeed);
     },
 
     pauseGame() {
@@ -110,9 +124,7 @@ export default {
 
       this.$store.dispatch('resetGlobalStates');
       this.$store.dispatch(`${this.mode}/resetStates`);
-      // Works as expected but maybe it's better to reset
-      // excisting objects content rather than recreat and
-      // pushing to the board ?
+
       this.$store.dispatch('clearBoard');
       this.$store.dispatch('setBoard');
     },
