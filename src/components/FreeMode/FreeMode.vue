@@ -26,18 +26,14 @@ export default {
     this.$store.dispatch('resetGlobalStates');
     this.$store.dispatch('freeMode/resetStates');
 
-    console.log('CREATED!');
-    // Maybe set words and characters once in app component
-    // Or no maybe we need to set words seprately for each game mode
-    // for now keep it here but REMEMBER: It is called every time
-    // and the call value is heavy (7000 words...)
+    // Set words and characters only once in app life cycle
+    if (!this.$store.state.freeMode.words.length) {
+      this.$store.commit('freeMode/SET_WORDS', words);
+      this.$store.commit('freeMode/SET_CHARACTERS');
+    }
 
-    // NOTE: Currectly just works for the freeMode
-    this.$store.commit('freeMode/SET_WORDS', words);
-    this.$store.commit('freeMode/SET_CHARACTERS');
-
-    // Quick fix for change between modes board size change bug
-    // Use a better solution
+    // Reset the board size
+    // Maybe other game modes have changed it!
     this.$store.commit('SET_COLS', 7);
     this.$store.commit('SET_ROWS', 7);
   },
