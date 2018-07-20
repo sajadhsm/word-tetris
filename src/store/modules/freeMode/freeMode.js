@@ -90,7 +90,6 @@ const actions = {
         hit.bottomIsBlock(rootState)
       ) {
         commit('SET_GAME_OVER', true, { root: true });
-        console.log('GAME OVER :(');
         return;
       }
 
