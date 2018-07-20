@@ -2,12 +2,6 @@
   <div class="controls">
     <button
       class="button"
-      @click="replayGame">
-      <font-awesome-icon icon="redo" />
-    </button>
-
-    <button
-      class="button"
       @click="goToMainMenu">
       <font-awesome-icon icon="home" />
     </button>
@@ -24,32 +18,22 @@
 export default {
   name: 'GameOverControls',
 
-  // Destroy is called after other component creation...
-  // So should reset the state by methods to avoid
-  // SET_TIME -> ZERO
+  beforeDestroy() {
+    // Unlock nextLevel
+    this.$store.dispatch('levelMode/nextLevel');
+    localStorage.setItem('currentLevel', this.$store.state.levelMode.currentLevel);
+
+    // Reset states in case of redirection
+    this.$store.dispatch('resetGlobalStates');
+    this.$store.dispatch('levelMode/resetStates');
+  },
+
   methods: {
     goToMainMenu() {
       this.$router.push({ name: 'main-menu' });
-      this.$store.dispatch('resetGlobalStates');
-      this.$store.dispatch('levelMode/resetStates');
-    },
-    replayGame() {
-      this.$router.push({ name: 'level-mode' });
-      this.$store.dispatch('resetGlobalStates');
-      this.$store.dispatch('levelMode/resetStates');
     },
     nextLevel() {
-      // NOTE: The level is updated just by this button
-      // It should happens when the win component is created
-      // then should find a way to be able to replay the same level
-      // or select from previous levels!
-      this.$store.dispatch('levelMode/nextLevel');
-      localStorage.setItem('currentLevel', this.$store.state.levelMode.currentLevel);
-
       this.$router.push({ name: 'level-mode' });
-
-      this.$store.dispatch('resetGlobalStates');
-      this.$store.dispatch('levelMode/resetStates');
     },
   },
 };
