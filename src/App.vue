@@ -19,6 +19,18 @@ export default {
       return isDark ? 'dark' : '';
     },
   },
+
+  mounted() {
+    // Load the theme from localStorage
+    if (localStorage.getItem('darkTheme')) {
+      try {
+        const isDark = JSON.parse(localStorage.getItem('darkTheme'));
+        this.$store.commit('SET_DARK_THEME', isDark);
+      } catch (e) {
+        localStorage.removeItem('darkTheme');
+      }
+    }
+  },
 };
 </script>
 

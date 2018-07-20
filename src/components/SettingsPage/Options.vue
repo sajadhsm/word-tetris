@@ -35,11 +35,19 @@ export default {
     },
 
     setLightTheme() {
+      // Ignore setting same value
+      if (!this.$store.state.darkTheme) return;
+
       this.$store.commit('SET_DARK_THEME', false);
+      localStorage.setItem('darkTheme', false);
     },
 
     setDarkTheme() {
+      // Ignore setting same value
+      if (this.$store.state.darkTheme) return;
+
       this.$store.commit('SET_DARK_THEME', true);
+      localStorage.setItem('darkTheme', true);
     },
   },
 };
