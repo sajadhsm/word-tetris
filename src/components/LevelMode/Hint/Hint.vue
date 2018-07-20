@@ -7,13 +7,11 @@
     </p>
 
     <p v-else-if="level.type === 'opposite'">
-      <span>{{ level.hint }} != </span>
-      <span class="mystery"> {{ mysteryWord }} </span>
+      <span>مخالف "{{ level.hint }}"</span>
     </p>
 
     <p v-else-if="level.type === 'synonym'">
-      <span>{{ level.hint }} = </span>
-      <span class="mystery">{{ mysteryWord }}</span>
+      <span>مترادف "{{ level.hint }}"</span>
     </p>
 
     <p v-else>بدون راهنمایی</p>
@@ -60,6 +58,6 @@ export default {
   text-align: center;
 }
 .mystery {
-  color: rgba(0, 0, 0, 0.4);
+  opacity: 0.6;
 }
 </style>
