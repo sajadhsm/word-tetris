@@ -31,7 +31,7 @@ export default {
   align-items: center;
   flex-basis: calc(100% / 3);
 }
-/* Code dublication with .col */
+
 .next-block {
   width: 4rem;
   height: 4rem;
