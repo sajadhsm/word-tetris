@@ -53,6 +53,9 @@ export default {
     const wordLen = this.$store.getters['levelMode/levelWordLen'];
     this.$store.commit('SET_COLS', wordLen);
 
+    // Initial spawnLocation in the middle
+    this.$store.dispatch('setSpawnLoacation');
+
     const levelTime = this.$store.getters['levelMode/levelTime'];
     this.$store.commit('SET_TIME', levelTime);
   },

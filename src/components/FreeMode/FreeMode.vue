@@ -36,6 +36,9 @@ export default {
     // Maybe other game modes have changed it!
     this.$store.commit('SET_COLS', 7);
     this.$store.commit('SET_ROWS', 7);
+
+    // Initial spawnLocation in the middle
+    this.$store.dispatch('setSpawnLoacation');
   },
 };
 </script>
