@@ -24,6 +24,13 @@ export default new Router({
       path: '/freemode',
       name: 'free-mode',
       component: FreeMode,
+      beforeEnter(to, from, next) {
+        // Force game mode change
+        if (store.state.gameMode !== 'freeMode') {
+          store.commit('SET_GAME_MODE', 'freeMode');
+        }
+        next();
+      },
     },
     {
       path: '/levelmode',
@@ -31,7 +38,6 @@ export default new Router({
       component: LevelMode,
       beforeEnter(to, from, next) {
         // Force game mode change
-        // Maybe a better solution?
         if (store.state.gameMode !== 'levelMode') {
           store.commit('SET_GAME_MODE', 'levelMode');
         }
