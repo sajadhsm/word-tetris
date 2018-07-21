@@ -63,7 +63,7 @@ export default [{
   type: 'idiom',
   speed: 1000,
   hint: {
-    prefix: 'آش نخورده و دهن سوخته',
+    prefix: 'آش نخورده و دهن',
 
   },
   time: {
