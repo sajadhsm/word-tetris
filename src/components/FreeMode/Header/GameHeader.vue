@@ -8,8 +8,8 @@
 
     <transition name="word-show">
       <div
-        class="created-words"
-        v-if="$store.state.freeMode.showWords">
+        v-if="$store.state.freeMode.showWords"
+        class="created-words">
         {{ $store.state.freeMode.showWords }}
       </div>
     </transition>
