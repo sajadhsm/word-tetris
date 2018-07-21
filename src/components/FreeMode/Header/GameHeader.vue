@@ -5,6 +5,14 @@
       <NextBlock />
       <Controls />
     </div>
+
+    <transition name="word-show">
+      <div
+        class="created-words"
+        v-if="$store.state.freeMode.showWords">
+        {{ $store.state.freeMode.showWords }}
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -30,5 +38,26 @@ export default {
   max-width: 768px;
   margin: 0 auto;
   padding: 1rem;
+}
+.created-words {
+  position: absolute;
+  left: 50%;
+  top: -5rem;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  font-weight: 700;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+.word-show-leave-active {
+  transition: all 1.5s;
+}
+.word-show-leave-to {
+  position: absolute;
+  left: 50%;
+  top: 8rem;
+  font-size: 4rem;
+  font-weight: 700;
+  transform: translateX(-50%);
+  opacity: 0;
 }
 </style>

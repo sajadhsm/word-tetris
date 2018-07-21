@@ -6,6 +6,7 @@ const state = {
   characters: [],
   score: 0,
   matchWords: 0,
+  showWords: '',
 };
 
 const getters = {
@@ -41,6 +42,10 @@ const mutations = {
 
   SET_MATCH_WORDS(state, value) {
     state.matchWords = value;
+  },
+
+  SET_SHOW_WORDS(state, words) {
+    state.showWords = words;
   },
 };
 
@@ -78,8 +83,23 @@ const actions = {
       hit.noMoreRow(rootState) ||
       hit.bottomIsBlock(rootState)
     ) {
-      checkForMatchWord(commit, rootState, state);
+      const words = checkForMatchWord(commit, rootState, state);
 
+      // If any words matched show it to the screen
+      if (words) {
+        let show = '';
+        // There may be 2 words!
+        if (words[0]) show += words[0];
+        if (words[0] && words[1]) show += ' | ';
+        if (words[1]) show += words[1];
+
+        commit('SET_SHOW_WORDS', show);
+
+        // Clear it after one second!
+        setTimeout(() => {
+          commit('SET_SHOW_WORDS', '');
+        }, 1000);
+      }
       // Set the next block spawn location before
       // game over check, because the game should over
       // if next block is unable to placed into spawn location
