@@ -4,7 +4,7 @@
     <div class="table"> <!-- wrapper -->
 
       <div class="table-header">
-        <span class="rank">رنک</span>
+        <span class="rank">رتبه</span>
         <span class="score">امتیاز</span>
         <span class="time">زمان</span>
         <span class="words">کلمات</span>
