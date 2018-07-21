@@ -23,29 +23,40 @@ function maxWordFinderInRow(array, cCol, cRow, localState) {
   // is in the word lists
   let maxBlocks = [];
   let maxWordLength = 0;
+  let maxWord;
   for (let i = wordRightIndex - 1; i > wordLeftIndex; i -= 1) {
     let word = array[i].content;
     const blocks = [{
       row: cRow,
       col: i,
+      content: array[i].content,
     }];
     for (let j = i - 1; j > wordLeftIndex; j -= 1) {
       word += array[j].content;
       blocks.push({
         row: cRow,
         col: j,
+        content: array[j].content,
       });
       if (localState.words.includes(word)) { // if word found
         if (word.length > maxWordLength) { // if found word is greater than previous maximum word
           maxWordLength = word.length;
           maxBlocks = blocks;
+          maxWord = word;
         }
       }
     }
   }
+
+  if (maxWord) {
+    // Remove wrong blocks
+    const chars = maxWord.split('');
+    maxBlocks = maxBlocks.filter(b => chars.includes(b.content));
+  }
   return {
     blocks: maxBlocks,
     score: maxWordLength,
+    word: maxWord,
   };
 }
 
@@ -74,22 +85,26 @@ function maxWordFinderInCol(array, cCol, cRow, localState) {
   // bottom-up words in column
   let maxBlocks = [];
   let maxWordLength = 0;
+  let maxWord;
   for (let i = wordRightIndex - 1; i > wordLeftIndex; i -= 1) {
     let word = array[i].content;
     const blocks = [{
       row: i,
       col: cCol,
+      content: array[i].content,
     }];
     for (let j = i - 1; j > wordLeftIndex; j -= 1) {
       word += array[j].content;
       blocks.push({
         row: j,
         col: cCol,
+        content: array[j].content,
       });
       if (localState.words.includes(word)) { // if word found
         if (word.length > maxWordLength) { // if found word is greater than previous maximum word
           maxWordLength = word.length;
           maxBlocks = blocks;
+          maxWord = word;
         }
       }
     }
@@ -100,24 +115,35 @@ function maxWordFinderInCol(array, cCol, cRow, localState) {
     const blocks = [{
       row: i,
       col: cCol,
+      content: array[i].content,
     }];
     for (let j = i + 1; j < wordRightIndex; j += 1) {
       word += array[j].content;
       blocks.push({
         row: j,
         col: cCol,
+        content: array[j].content,
       });
       if (localState.words.includes(word)) { // if word found
         if (word.length > maxWordLength) { // if found word is greater than previous maximum word
           maxWordLength = word.length;
           maxBlocks = blocks;
+          maxWord = word;
         }
       }
     }
   }
+
+  if (maxWord) {
+    // Remove wrong blocks
+    const chars = maxWord.split('');
+    maxBlocks = maxBlocks.filter(b => chars.includes(b.content));
+  }
+
   return {
     blocks: maxBlocks,
     score: maxWordLength,
+    word: maxWord,
   };
 }
 /**
@@ -145,7 +171,7 @@ export default function checkForMatchWord(commit, rootState, localState) {
   const col = maxWordFinderInCol(colArray, rootState.currentCol, rootState.currentRow, localState);
 
   // blocks of column and row that should be removed
-  blocks = blocks.concat(blocks, col.blocks, row.blocks);
+  blocks = blocks.concat(col.blocks, row.blocks);
 
   // if have blocks, clear them in board and calculate score
   if (blocks.length !== 0) {
@@ -154,5 +180,10 @@ export default function checkForMatchWord(commit, rootState, localState) {
     if (row.score === 0) {
       localState.matchWords += 1;
     } else if (col.score === 0) { localState.matchWords += 1; } else { localState.matchWords += 2; }
+
+    // Return the max words
+    return [row.word, col.word];
   }
+
+  return false;
 }
