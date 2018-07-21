@@ -1,6 +1,8 @@
 <template>
   <div class="controls">
-    <button class="button">
+    <button
+      class="button"
+      @click="goToScoreBoard">
       <font-awesome-icon
         icon="list-ul"
         flip="horizontal"/>
@@ -38,6 +40,9 @@ export default {
   methods: {
     goToMainMenu() {
       this.$router.push({ name: 'main-menu' });
+    },
+    goToScoreBoard() {
+      this.$router.push({ name: 'score-board' });
     },
     replayGame() {
       const name = {
