@@ -300,7 +300,7 @@ export default [{
   type: 'idiom',
   speed: 800,
   hint: {
-    prefix: 'کی بود مانند دیدن',
+    sufix: 'کی بود مانند دیدن',
   },
   time: {
     seconds: 27,
@@ -362,8 +362,7 @@ export default [{
   type: 'idiom',
   speed: 800,
   hint: {
-    prefix: 'طاق',
-    sufix: 'شد',
+    sufix: 'طاق شد',
   },
   time: {
     seconds: 0,
@@ -443,7 +442,7 @@ export default [{
 },
 {
   word: 'مختوم',
-  type: 'idiom',
+  type: 'synonym',
   speed: 700,
   hint: 'پایان',
   time: {
@@ -453,7 +452,7 @@ export default [{
 },
 {
   word: 'مفروز',
-  type: 'idiom',
+  type: 'synonym',
   hint: 'جدا کردن',
   speed: 700,
   time: {
